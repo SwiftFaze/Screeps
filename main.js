@@ -21,13 +21,6 @@ module.exports.loop = function () {
 
 
 
-
-
-
-
-
-
-
 //================== MEMORY CLEAR ================
 
 for (let name in Memory.creeps)
@@ -38,23 +31,24 @@ for (let name in Memory.creeps)
     }
 }
 
+
 //===================== TOWER =====================
 
 Tower();    
 
 
-//console.log(CreepRatio('harvester'));
+
 
 //==================== CREEP SPAWN =================
 
 SpawningFunction();
 
 
+
+
+
 //============ LINK =============
     
-
-
-
   var link = Game.rooms.W12N18.find(FIND_STRUCTURES, {
     filter: (structure) => 
         {
@@ -73,12 +67,18 @@ SpawningFunction();
     Link(link[1], link[0]);
     Link(link[2], link[0]);
     
+
+
+
 //============ Terminal =============    
     
     //console.log(Game.market.calcTransactionCost(100000, 'W13N18', 'W12N18'));
     Game.rooms['W13N18'].terminal.send(RESOURCE_ENERGY, 5000, 'W12N18','trade contract #1');
     
     
+
+
+
     
 //============ LABS =============    
 /*
@@ -92,6 +92,8 @@ SpawningFunction();
 */ 
     
     
+
+
 //==================== MEMORY ASSIGNED TO ROLE ===================
 
     for(var name in Game.spawns) {
