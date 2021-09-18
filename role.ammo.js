@@ -86,11 +86,17 @@ var roleammo = {
                         creep.withdraw(link[0], RESOURCE_ENERGY);
                     }
                 }
-                else
+                if(terminal[0].store[RESOURCE_ENERGY] != 0)
                 {
                     creep.moveTo(terminal[0]);
                     creep.withdraw(terminal[0], RESOURCE_ENERGY);  
                 }
+                if(Storage[0].store[RESOURCE_ENERGY] > 400000 /*add tower length*/)
+                {
+                    creep.moveTo(Storage[0]);
+                    creep.withdraw(Storage[0], RESOURCE_ENERGY);
+                }
+                
                 
             }
             //If there are enemys - Collects energy from Storage
@@ -105,20 +111,24 @@ var roleammo = {
                     creep.moveTo(towers[0]);
                 }
             }
+            
             if (creep.memory.ammoing == true && towers == "") {
-                if(Storage[0].store[RESOURCE_ENERGY] >= 200000)
+                /*
+                if(Storage[0].store[RESOURCE_ENERGY] >= 500000)
                 {
                     if (creep.transfer(terminal[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(terminal[0]);
                     }
                 }
                 else{
+                */
                     if (creep.transfer(Storage[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(Storage[0]);
                     }
-                }
+                
 
             }
+            
         }
     }
 

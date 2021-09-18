@@ -19,7 +19,7 @@ global.Tower = function ()
             var roadsToRepair = towers[name].room.find(FIND_STRUCTURES, {
                                 filter: (structure) => (structure.structureType == STRUCTURE_ROAD) && structure.hits < structure.hitsMax});
             var wallsToRepair = towers[name].room.find(FIND_STRUCTURES, {
-                                filter: (structure) => (structure.structureType == STRUCTURE_WALL) && structure.hits < 4000000});    
+                                filter: (structure) => (structure.structureType == STRUCTURE_WALL) && structure.hits < 10000});    
             var containersToRepair = towers[name].room.find(FIND_STRUCTURES, {
                                 filter: (structure) => (structure.structureType == STRUCTURE_CONTAINER) && structure.hits < structure.hitsMax});
             var storageToRepair = towers[name].room.find(FIND_STRUCTURES, {

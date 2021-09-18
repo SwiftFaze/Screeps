@@ -230,7 +230,7 @@ global.CreepSpawnAmount = function (CreepType, RoomBalance) {
                 case "Upgrader":
                     return 1
                 case "Builder":
-                    return 1
+                    return 2
                 case "Linker":
                     return 1
                 case "Linker2":
@@ -410,12 +410,12 @@ global.CreepMaker = function (ThisRoom, RoomBalance, CreepType) {
             }
             break;
         case 12900:
-            switch (CreepType) {
+           switch (CreepType) {
                 case "Harvester":
-                    SpawnName.spawnCreep(CreepBodyParts(0, 8, 0, 0, 0, 0, 6, 6), CreepName("Harvester"), { memory: { role: 'harvester' } });
+                    SpawnName.spawnCreep(CreepBodyParts(0, 6, 0, 0, 0, 0, 5, 4), CreepName("Harvester"), { memory: { role: 'harvester' } });
                     break;
                 case "Upgrader":
-                    SpawnName.spawnCreep(CreepBodyParts(0, 10, 0, 0, 0, 0, 8, 6), CreepName("Upgrader"), { memory: { role: 'upgrader' } });
+                    SpawnName.spawnCreep(CreepBodyParts(0, 4, 0, 0, 0, 0, 2, 2), CreepName("Upgrader"), { memory: { role: 'upgrader' } });
                     break;
                 case "Builder":
                     SpawnName.spawnCreep(CreepBodyParts(0, 8, 0, 0, 0, 0, 6, 4), CreepName("Builder"), { memory: { role: 'builder' } });
@@ -427,7 +427,7 @@ global.CreepMaker = function (ThisRoom, RoomBalance, CreepType) {
                     SpawnName.spawnCreep(CreepBodyParts(0, 2, 0, 0, 0, 0, 10, 2), CreepName("Linker2"), { memory: { role: 'linker2' } });
                     break;
                 case "Ammo":
-                    SpawnName.spawnCreep(CreepBodyParts(0, 10, 0, 0, 0, 0, 0, 6), CreepName("Ammo"), { memory: { role: 'ammo' } });
+                    SpawnName.spawnCreep(CreepBodyParts(0, 16, 0, 0, 0, 0, 0, 10), CreepName("Ammo"), { memory: { role: 'ammo' } });
                     break;
             }
 
