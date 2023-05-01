@@ -1,4 +1,4 @@
-const { hasLink, getCreepName, getClosestBasicStructure } = require('../creep');
+const { hasLink, getCreepName, getClosestBasicStructure } = require('../main/creep');
 require('screeps');
 
 

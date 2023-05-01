@@ -2,7 +2,7 @@ const Harvesters = require('./harvester')
 const Builders = require('./builder')
 const Upgraders = require('./upgrader')
 const Transporters = require('./transporter')
-const Creeps = require('creep')
+const Creeps = require('src/main/creep')
 // const CreepComponents = require('./creepComponents')
 const Settings = require('./settings')
 
