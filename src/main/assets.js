@@ -1,4 +1,3 @@
-
 const controllerSigns = [
     "If you don't Rock and Stone, you ain't comin' home!",
     "Rock on!",
@@ -36,5 +35,4 @@ const controllerSigns = [
 ]
 
 
-
-module.exports = { controllerSigns };
+module.exports = {controllerSigns};
