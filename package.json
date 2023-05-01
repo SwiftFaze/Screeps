@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "test": "jest --watchAll --verbose"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.1",
+    "@types/screeps": "^3.3.2"
+  },
+  "dependencies": {
+    "jest": "^29.5.0",
+    "screeps": "^4.2.14"
+  }
+}

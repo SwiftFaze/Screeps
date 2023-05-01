@@ -1,154 +1,125 @@
-require('functions');
+const Harvesters = require('./harvester')
+const Builders = require('./builder')
+const Upgraders = require('./upgrader')
+const Transporters = require('./transporter')
+const Creeps = require('creep')
+// const CreepComponents = require('./creepComponents')
+const Settings = require('./settings')
 
+function spawnCreep() {
 
-global.SpawningFunction = function () {
-    let count = Math.floor(Math.random() * 100000);
+    for (const spawnName in Game.spawns) {
+        const spawn = Game.spawns[spawnName]
+        const creep = Creeps.createCreep(spawn);
 
-    for (var name in Game.rooms) {
-        var allrooms = Game.rooms[name];
+        if (creep) {
+            var source = getBestSource(spawnName);
+            var sorId = null;
+            sorId = source ? source.id : null;
 
-        var NumberOfHarvestersInMainRoom = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.homeRoom == allrooms.name);
+            if (canSpawnCreep(spawn, creep)) {
+                if (creep.components.role === Creeps.CREEP_ROLES.HARVESTER) {
+                    Memory.sources[sorId] = Memory.sources[sorId] + 1;
+                }
+                spawn.spawnCreep(creep.components.bodyParts, creep.name, {
+                    memory: {
+                        role: creep.components.role, sourceId: sorId
+                    }
+                })
+            }
 
-        //console.log(NumberOfHarvestersInMainRoom + " in " + allrooms.name);
-        //console.log(allrooms.energyCapacityAvailable);
-
-
-
-
-
-
-
-
-
-
-        var NumberOfHarvesters = _.sum(Game.creeps, (c) => c.memory.role == 'harvester' && c.memory.homeRoom == allrooms.name);
-        var NumberOfUpgraders = _.sum(Game.creeps, (c) => c.memory.role == 'upgrader' && c.memory.homeRoom == allrooms.name);
-        var NumberOfBuilders = _.sum(Game.creeps, (c) => c.memory.role == 'builder' && c.memory.homeRoom == allrooms.name);
-        var NumberOfAmmoers = _.sum(Game.creeps, (c) => c.memory.role == 'ammo' && c.memory.homeRoom == allrooms.name);
-        var NumberOfLinkers = _.sum(Game.creeps, (c) => c.memory.role == 'linker' && c.memory.homeRoom == allrooms.name);
-        var NumberOfLinkerExplorers = _.sum(Game.creeps, (c) => c.memory.role == 'linkerexplorer' && c.memory.homeRoom == allrooms.name);
-        var NumberOfExtractors = _.sum(Game.creeps, (c) => c.memory.role == 'extractor' && c.memory.homeRoom == allrooms.name);
-        var NumberOfExplorers = _.sum(Game.creeps, (c) => c.memory.role == 'explorer' && c.memory.homeRoom == allrooms.name);
-        var NumberOfAttackers = _.sum(Game.creeps, (c) => c.memory.role == 'attacker' && c.memory.homeRoom == allrooms.name);
-        var NumberOfHealers = _.sum(Game.creeps, (c) => c.memory.role == 'healer' && c.memory.homeRoom == allrooms.name);
-        var NumberOfLinkers2 = _.sum(Game.creeps, (c) => c.memory.role == 'linker2' && c.memory.homeRoom == allrooms.name);
-
-
-        var WantedHarvesters = 2;
-        var WantedUpgraders = 1;
-        var WantedBuilders = 1;
-        var WantedAmmoers = 1;
-        var WantedLinkers = 1;
-        var WantedLinkerExplorers = 0;
-        var WantedExtractors = 1;
-        var WantedExplorers = 0;
-        var WantedAttackers = 0;
-        var WantedHealers = 0;
-
-        let Harvestercount = "Harvester_" + count;
-        let Upgradercount = "Upgrader_" + count;
-        let Buildercount = "Builder_" + count;
-        let Ammocount = "Ammo_" + count;
-        let Linkercount = "Link_" + count;
-        let Explorercount = "Explorer_" + count;
-        let LinkerExplorercount = "LinkerExplorer_" + count;
-        let Attackercount = "Attacker_" + count;
-        let Extractorcount = "Extractor_" + count;
-        let Healercount = "Healer_" + count;
-
-
-
-        for (var name in Game.spawns) {
-            var allspawns = Game.spawns[name].name;
         }
 
+    }
+}
 
+function getBestSource(spawnName) {
 
-        if (allrooms.name == "W12N18") {
-            allrooms.energyCapacityAvailable
-            
+    var sources = Game.spawns[spawnName].room.find(FIND_SOURCES);
+    var previousAssignedSource = null;
+    var previousMemorySourceCount = Infinity;
 
+    for (var i in sources) {
+        var source = sources[i];
 
-
-
-            if (NumberOfHarvesters == 0 && Game.spawns.Spawn2.spawnCreep(CreepBodyParts(0, 8, 0, 0, 0, 0, 6, 6), CreepName("Harvester"), { memory: { role: 'harvester' } }) != 0 ) {
-                Game.spawns.Spawn2.spawnCreep(CreepBodyParts(0, 2, 0, 0, 0, 0, 1, 2), CreepName("Harvester"), { memory: { role: 'harvester' } });
-            }
-           else {
-                if (NumberOfHarvesters < CreepSpawnAmount('Harvester', RoomBalance(allrooms.name))) {
-                    CreepMaker(allrooms.name, RoomBalance(allrooms.name), 'Harvester');
-                }
-                else {
-                    if (NumberOfAmmoers < CreepSpawnAmount('Ammo', RoomBalance(allrooms.name))) {
-                        CreepMaker(allrooms.name, RoomBalance(allrooms.name), 'Ammo');
-                    }
-                    else {
-                        if (NumberOfLinkers < CreepSpawnAmount('Linker', RoomBalance(allrooms.name))) {
-                            CreepMaker(allrooms.name, RoomBalance(allrooms.name), 'Linker');
-                        }
-                        else {
-                            if (NumberOfLinkers2 < CreepSpawnAmount('Linker2', RoomBalance(allrooms.name))) {
-                                CreepMaker(allrooms.name, RoomBalance(allrooms.name), 'Linker2');
-                            }
-                            else {
-                                if (NumberOfUpgraders < CreepSpawnAmount('Upgrader', RoomBalance(allrooms.name))) {
-                                    CreepMaker(allrooms.name, RoomBalance(allrooms.name), 'Upgrader');
-                                }
-                                else {
-                                    if (NumberOfBuilders < CreepSpawnAmount('Builder', RoomBalance(allrooms.name))) {
-                                        CreepMaker(allrooms.name, RoomBalance(allrooms.name), 'Builder');
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-
-
-
-        if (allrooms.name == "W13N18") {
-            allrooms.energyCapacityAvailable
-            
-
-
-
-
-            if (NumberOfHarvesters == 0 && Game.spawns.Spawn3.spawnCreep(CreepBodyParts(0, 8, 0, 0, 0, 0, 6, 6), CreepName("Harvester"), { memory: { role: 'harvester' } }) != 0 ) {
-                Game.spawns.Spawn3.spawnCreep(CreepBodyParts(0, 2, 0, 0, 0, 0, 1, 2), CreepName("Harvester"), { memory: { role: 'harvester' } });
-            }
-            else {
-                if (NumberOfHarvesters < CreepSpawnAmount('Harvester', RoomBalance(allrooms.name))) {
-                    CreepMaker(allrooms.name, RoomBalance(allrooms.name), 'Harvester');
-                }
-                else {
-                    if (NumberOfAmmoers < CreepSpawnAmount('Ammo', RoomBalance(allrooms.name))) {
-                        CreepMaker(allrooms.name, RoomBalance(allrooms.name), 'Ammo');
-                    }
-                    else {
-                        if (NumberOfLinkers < CreepSpawnAmount('Linker', RoomBalance(allrooms.name))) {
-                            CreepMaker(allrooms.name, RoomBalance(allrooms.name), 'Linker');
-                        }
-                        else {
-                            if (NumberOfLinkers2 < CreepSpawnAmount('Linker2', RoomBalance(allrooms.name))) {
-                                CreepMaker(allrooms.name, RoomBalance(allrooms.name), 'Linker2');
-                            }
-                            else {
-                                if (NumberOfUpgraders < CreepSpawnAmount('Upgrader', RoomBalance(allrooms.name))) {
-                                    CreepMaker(allrooms.name, RoomBalance(allrooms.name), 'Upgrader');
-                                }
-                                else {
-                                    if (NumberOfBuilders < CreepSpawnAmount('Builder', RoomBalance(allrooms.name))) {
-                                        CreepMaker(allrooms.name, RoomBalance(allrooms.name), 'Builder');
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+        if (sourceHasFreeSpaces(source)) {
+            const memorySourceCount = Memory.sources[source.id] || 0
+            if (memorySourceCount < previousMemorySourceCount) {
+                previousMemorySourceCount = memorySourceCount;
+                previousAssignedSource = source;
             }
         }
     }
+    return previousAssignedSource;
+
+
 }
+
+function getFreeSpaces(selectedSource) {
+    const source = Game.getObjectById(selectedSource.id);
+    if (source.room.controller.level >= Settings.SINGLE_HARVESTER_ROOM_CONTROLLER_LEVEL) {
+        return 1;
+    } else {
+        return source.room.lookForAtArea(LOOK_TERRAIN, source.pos.y - 1, source.pos.x - 1, source.pos.y + 1, source.pos.x + 1, true)
+            .filter(tile => tile.terrain === "plain" || tile.terrain === "swamp")
+            .length;
+    }
+
+}
+
+global.sourceHasFreeSpaces = function (selectedSource) {
+    var assignedCreeps = Memory.sources[selectedSource.id] || 0;
+    return assignedCreeps < getFreeSpaces(selectedSource);
+
+}
+global.canSpawnHarvester = function (room) {
+    var canSpawn = false;
+    const roomSources = room.find(FIND_SOURCES)
+    for (const i in roomSources) {
+        if (sourceHasFreeSpaces(roomSources[i])) {
+            canSpawn = true;
+        }
+    }
+    return canSpawn;
+
+
+}
+
+
+function canSpawnCreep(spawn, creep) {
+    if (creep) {
+        const spawnSpawnValue = spawn.spawnCreep(creep.components.bodyParts, creep.name, {dryRun: true});
+        if (spawnSpawnValue === 0) {
+            return true;
+        }
+    }
+    return false;
+
+
+}
+
+
+function runCreep() {
+
+    for (const creepName in Game.creeps) {
+        const creepMemory = Memory.creeps[creepName]
+        const creep = Game.creeps[creepName]
+
+        switch (creepMemory.role) {
+            case Creeps.CREEP_ROLES.HARVESTER:
+                Harvesters.run(creep)
+                break;
+            case Creeps.CREEP_ROLES.UPGRADER:
+                Upgraders.run(creep)
+                break;
+            case Creeps.CREEP_ROLES.BUILDER:
+                Builders.run(creep)
+                break;
+            case Creeps.CREEP_ROLES.TRANSPORTER:
+                Transporters.run(creep)
+                break;
+        }
+
+    }
+}
+module.exports = {runCreep, spawnCreep};
