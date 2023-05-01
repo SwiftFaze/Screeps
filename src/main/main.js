@@ -1,6 +1,6 @@
-const Memories = require('src/main/memory')
-const Spawners = require('src/main/spawn')
-const Towers = require('src/main/tower')
+const Memories = require('./memory')
+const Spawners = require('./spawn')
+const Towers = require('./tower')
 
 
 module.exports.loop = function () {

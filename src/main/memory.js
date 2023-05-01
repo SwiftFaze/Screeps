@@ -1,5 +1,5 @@
-const room = require('src/main/room')
-const creep = require('src/main/creep')
+const room = require('./room')
+const creep = require('./creep')
 
 
 // class GameMemory {
