@@ -1,4 +1,4 @@
-const controllerSigns = require("../../ressource/controllersigns")
+const controllerSigns = require("../../resource/controllersigns")
 
 
 
