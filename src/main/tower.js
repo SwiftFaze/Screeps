@@ -1,5 +1,9 @@
 function run() {
 
+    const STRUCTURE_REPAIR_THRESHOLD = 0.8
+
+
+
     for (var room in Game.rooms) {
         var allRooms = Game.rooms[room];
 
@@ -11,19 +15,19 @@ function run() {
         for (var tower in towers) {
             // Defining things to repair
             var rampartsToRepair = towers[tower].room.find(FIND_STRUCTURES, {
-                filter: (structure) => (structure.structureType === STRUCTURE_RAMPART) && structure.hits < 500
+                filter: (structure) => (structure.structureType === STRUCTURE_RAMPART) && structure.hits < (structure.hits * STRUCTURE_REPAIR_THRESHOLD)
             });
             var roadsToRepair = towers[tower].room.find(FIND_STRUCTURES, {
-                filter: (structure) => (structure.structureType === STRUCTURE_ROAD) && structure.hits < structure.hitsMax
+                filter: (structure) => (structure.structureType === STRUCTURE_ROAD) && structure.hits < (structure.hits * STRUCTURE_REPAIR_THRESHOLD)
             });
             var wallsToRepair = towers[tower].room.find(FIND_STRUCTURES, {
-                filter: (structure) => (structure.structureType === STRUCTURE_WALL) && structure.hits < 4000
+                filter: (structure) => (structure.structureType === STRUCTURE_WALL) && structure.hits < (structure.hits * STRUCTURE_REPAIR_THRESHOLD)
             });
             var containersToRepair = towers[tower].room.find(FIND_STRUCTURES, {
-                filter: (structure) => (structure.structureType === STRUCTURE_CONTAINER) && structure.hits < structure.hitsMax
+                filter: (structure) => (structure.structureType === STRUCTURE_CONTAINER) && structure.hits < (structure.hits * STRUCTURE_REPAIR_THRESHOLD)
             });
             var storageToRepair = towers[tower].room.find(FIND_STRUCTURES, {
-                filter: (structure) => (structure.structureType === STRUCTURE_STORAGE) && structure.hits < structure.hitsMax
+                filter: (structure) => (structure.structureType === STRUCTURE_STORAGE) && structure.hits < (structure.hits * STRUCTURE_REPAIR_THRESHOLD)
             });
 
             // Attack closest Hostile
