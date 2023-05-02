@@ -10,19 +10,19 @@ function run() {
         });
         for (var tower in towers) {
             // Defining things to repair
-            var rampartsToRepair = towers[tower].room.find(FIND_MY_STRUCTURES, {
+            var rampartsToRepair = towers[tower].room.find(FIND_STRUCTURES, {
                 filter: (structure) => (structure.structureType === STRUCTURE_RAMPART) && structure.hits < 500
             });
-            var roadsToRepair = towers[tower].room.find(FIND_MY_STRUCTURES, {
+            var roadsToRepair = towers[tower].room.find(FIND_STRUCTURES, {
                 filter: (structure) => (structure.structureType === STRUCTURE_ROAD) && structure.hits < structure.hitsMax
             });
-            var wallsToRepair = towers[tower].room.find(FIND_MY_STRUCTURES, {
+            var wallsToRepair = towers[tower].room.find(FIND_STRUCTURES, {
                 filter: (structure) => (structure.structureType === STRUCTURE_WALL) && structure.hits < 4000
             });
-            var containersToRepair = towers[tower].room.find(FIND_MY_STRUCTURES, {
+            var containersToRepair = towers[tower].room.find(FIND_STRUCTURES, {
                 filter: (structure) => (structure.structureType === STRUCTURE_CONTAINER) && structure.hits < structure.hitsMax
             });
-            var storageToRepair = towers[tower].room.find(FIND_MY_STRUCTURES, {
+            var storageToRepair = towers[tower].room.find(FIND_STRUCTURES, {
                 filter: (structure) => (structure.structureType === STRUCTURE_STORAGE) && structure.hits < structure.hitsMax
             });
 
