@@ -67,10 +67,11 @@ function runDefaultTransfermode() {
     if (Creeps.transfer2Structure(creep, extension)) {
         return;
     }
-    if (Creeps.transfer2Structure(creep, tower)) {
+    if (Creeps.transfer2Structure(creep, spawn)) {
         return;
     }
-    Creeps.transfer2Structure(creep, spawn)
+    Creeps.transfer2Structure(creep, tower)
+
 }
 
 
