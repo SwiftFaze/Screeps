@@ -76,7 +76,7 @@ const creepBuilds = {
             quantity: 6,
             body: [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, WORK, WORK, MOVE, MOVE, MOVE, MOVE]
         }, builder: {
-            priority: 1,
+            priority: 3,
             quantity: 1,
             body: [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, WORK, WORK, MOVE, MOVE, MOVE, MOVE]
         }
