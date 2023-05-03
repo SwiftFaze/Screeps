@@ -31,11 +31,11 @@ function run (selectedCreep) {
 
 
     } else {
-        if (isClosestStucture(extensionDistance, spawnDistance, towerDistance, controllerDistance)) {
+        // if (isClosestStucture(extensionDistance, spawnDistance, towerDistance, controllerDistance)) {
             if (Creeps.transfer2Structure(creep, extension)) {
                 return;
             }
-        }
+        // }
 
         if (isClosestStucture(towerDistance, extensionDistance, spawnDistance, controllerDistance)) {
 
