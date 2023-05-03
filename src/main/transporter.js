@@ -37,18 +37,22 @@ function run (selectedCreep) {
             }
         // }
 
-        if (isClosestStucture(towerDistance, extensionDistance, spawnDistance, controllerDistance)) {
+
+        // if (isClosestStucture(spawnDistance, extensionDistance, towerDistance, controllerDistance)) {
+        if (Creeps.transfer2Structure(creep, spawn)) {
+            return;
+        }
+        // }
+
+
+        // if (isClosestStucture(towerDistance, extensionDistance, spawnDistance, controllerDistance)) {
 
             if (Creeps.transfer2Structure(creep, tower)) {
                 return;
             }
-        }
+        // }
 
-        if (isClosestStucture(spawnDistance, extensionDistance, towerDistance, controllerDistance)) {
-            if (Creeps.transfer2Structure(creep, spawn)) {
-                return;
-            }
-        }
+
 
         if (isClosestStucture(controllerDistance, extensionDistance, towerDistance, storageDistance, spawnDistance)) {
             Creeps.upgradeRoomController(creep)
