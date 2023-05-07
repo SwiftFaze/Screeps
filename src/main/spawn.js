@@ -21,11 +21,18 @@ function spawnCreep() {
                 if (creep.components.role === Creeps.CREEP_ROLES.HARVESTER) {
                     Memory.sources[sorId] = Memory.sources[sorId] + 1;
                 }
+
+                if (creep.components.role === Creeps.CREEP_ROLES.BUILDER) {
+                    if (spawn.room.find(FIND_MY_CONSTRUCTION_SITES).length === 0) {
+                        return
+                    }
+                }
+
                 spawn.spawnCreep(creep.components.bodyParts, creep.name, {
                     memory: {
                         role: creep.components.role, sourceId: sorId
                     }
-                })
+                });
             }
 
         }
@@ -122,4 +129,5 @@ function runCreep() {
 
     }
 }
+
 module.exports = {runCreep, spawnCreep};

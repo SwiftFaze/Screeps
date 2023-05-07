@@ -1,4 +1,5 @@
 const Creeps = require("./creep")
+const Structures = require("./structures")
 let creep;
 let storage;
 let storageSite;
@@ -30,7 +31,10 @@ function run(selectedCreep) {
         }
 
     } else {
-        if (Creeps.withdrawFromStructure(creep, container)) {
+        if (Creeps.withdrawFromStructure(creep, storage, RESOURCE_ENERGY)) {
+            return;
+        }
+        if (Creeps.withdrawFromStructure(creep, container, RESOURCE_ENERGY)) {
             return;
         }
         if (Creeps.harvestStructure(creep, storage)) {
@@ -48,22 +52,22 @@ function setMemory() {
 }
 
 function setClosestStructures() {
-    source = Creeps.getAssignedSource(creep);
-    extension = Creeps.getClosestEnergyStructure(creep, STRUCTURE_EXTENSION);
-    extensionSite = Creeps.getClosestSite(creep, STRUCTURE_EXTENSION);
-    tower = Creeps.getClosestEnergyStructure(creep, STRUCTURE_TOWER);
-    towerSite = Creeps.getClosestSite(creep, STRUCTURE_TOWER);
-    road = Creeps.getMyClosestBasicStructure(creep, STRUCTURE_ROAD);
-    roadSite = Creeps.getClosestSite(creep, STRUCTURE_ROAD);
-    storage = Creeps.getClosestEnergyStructure(creep, STRUCTURE_STORAGE);
-    storageSite = Creeps.getClosestSite(creep, STRUCTURE_STORAGE);
-    rampart = Creeps.getMyClosestBasicStructure(creep, STRUCTURE_RAMPART);
-    rampartSite = Creeps.getClosestSite(creep, STRUCTURE_RAMPART);
-    container = Creeps.getClosestContainer(creep);
-    containerSite = Creeps.getClosestSite(creep, STRUCTURE_CONTAINER);
-    wall = Creeps.getMyClosestBasicStructure(creep, STRUCTURE_WALL);
-    wallSite = Creeps.getClosestSite(creep, STRUCTURE_WALL);
-    resourceEnergy = Creeps.getClosestDroppedResource(creep, RESOURCE_ENERGY);
+    source = Structures.getAssignedSource(creep);
+    extension = Structures.getClosestEnergyStructure(creep, STRUCTURE_EXTENSION);
+    extensionSite = Structures.getClosestSite(creep, STRUCTURE_EXTENSION);
+    tower = Structures.getClosestEnergyStructure(creep, STRUCTURE_TOWER);
+    towerSite = Structures.getClosestSite(creep, STRUCTURE_TOWER);
+    road = Structures.getMyClosestBasicStructure(creep, STRUCTURE_ROAD);
+    roadSite = Structures.getClosestSite(creep, STRUCTURE_ROAD);
+    storage = Structures.getClosestEnergyStructure(creep, STRUCTURE_STORAGE);
+    storageSite = Structures.getClosestSite(creep, STRUCTURE_STORAGE);
+    rampart = Structures.getMyClosestBasicStructure(creep, STRUCTURE_RAMPART);
+    rampartSite = Structures.getClosestSite(creep, STRUCTURE_RAMPART);
+    container = Structures.getClosestContainer(creep);
+    containerSite = Structures.getClosestSite(creep, STRUCTURE_CONTAINER);
+    wall = Structures.getMyClosestBasicStructure(creep, STRUCTURE_WALL);
+    wallSite = Structures.getClosestSite(creep, STRUCTURE_WALL);
+    resourceEnergy = Structures.getClosestDroppedResource(creep, RESOURCE_ENERGY);
 
 }
 

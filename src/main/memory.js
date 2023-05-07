@@ -2,10 +2,6 @@ const room = require('./room')
 const creep = require('./creep')
 
 
-// class GameMemory {
-//     version
-//     debugActivated
-// }
 
 
 function updateMemory() {
@@ -21,11 +17,6 @@ function updateMemory() {
 
 }
 
-
-global.isDebugMode = function () {
-    // const gameMemory = getGameMemory();
-    // return gameMemory.debugActivated
-};
 
 function updateRoomMemory() {
 

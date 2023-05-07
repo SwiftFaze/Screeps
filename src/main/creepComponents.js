@@ -23,11 +23,9 @@ class CreepComponents {
 // }
 
 
-function getCreepBody(arrayBodyparts)
-{
+function getCreepBody(arrayBodyparts) {
     return _.reduce(arrayBodyparts, (result, bodypartCount, bodypartName) => result.concat(new Array(bodypartCount).fill(global[bodypartName])), []);
 }
-
 
 
 const creepBuilds = {
@@ -39,7 +37,11 @@ const creepBuilds = {
             body: [WORK, WORK, MOVE, CARRY]
         }, transporter: {
             priority: 2,
-            quantity: 12,
+            quantity: 2,
+            body: [CARRY, CARRY, CARRY, WORK, MOVE]
+        }, upgrader: {
+            priority: 3,
+            quantity: 10,
             body: [CARRY, CARRY, CARRY, WORK, MOVE]
         }
     }, 2: {
@@ -49,8 +51,16 @@ const creepBuilds = {
             body: [WORK, WORK, MOVE, CARRY]
         }, transporter: {
             priority: 2,
-            quantity: 12,
+            quantity: 2,
             body: [CARRY, CARRY, CARRY, WORK, MOVE]
+        }, upgrader: {
+            priority: 3,
+            quantity: 10,
+            body: [CARRY, CARRY, CARRY, WORK, MOVE]
+        }, builder: {
+            priority: 4,
+            quantity: 1,
+            body: [WORK, MOVE, MOVE, CARRY, CARRY]
         }
     }, 3: {
         harvester: {
@@ -59,10 +69,14 @@ const creepBuilds = {
             body: [WORK, WORK, MOVE, CARRY]
         }, transporter: {
             priority: 2,
-            quantity: 12,
+            quantity: 2,
+            body: [CARRY, CARRY, CARRY, WORK, MOVE]
+        }, upgrader: {
+            priority: 3,
+            quantity: 10,
             body: [CARRY, CARRY, CARRY, WORK, MOVE]
         }, builder: {
-            priority: 3,
+            priority: 4,
             quantity: 2,
             body: [WORK, MOVE, MOVE, CARRY, CARRY]
         }
@@ -73,12 +87,16 @@ const creepBuilds = {
             body: [WORK, WORK, WORK, WORK, WORK, WORK, WORK, MOVE, CARRY]
         }, transporter: {
             priority: 2,
-            quantity: 6,
-            body: [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, WORK, WORK, MOVE, MOVE, MOVE, MOVE]
-        }, builder: {
+            quantity: 2,
+            body: [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, WORK, MOVE, MOVE, MOVE, MOVE]
+        }, upgrader: {
             priority: 3,
-            quantity: 1,
-            body: [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, WORK, WORK, MOVE, MOVE, MOVE, MOVE]
+            quantity: 10,
+            body: [MOVE, MOVE, MOVE, MOVE, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY]
+        }, builder: {
+            priority: 4,
+            quantity: 2,
+            body: [MOVE, MOVE, MOVE, MOVE, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY]
         }
     }
 

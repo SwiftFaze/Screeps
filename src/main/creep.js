@@ -1,4 +1,5 @@
 const CreepComponents = require("./creepComponents")
+const Structures = require("./structures")
 
 const CREEP_ROLES = {
     HARVESTER: 'harvester',
@@ -17,14 +18,6 @@ class MyCreep {
         this.name = name;
         this.components = components;
     }
-}
-
-function getCreepsList() {
-    const creepList = []
-    for (const creep in Game.creeps) {
-        creepList.push(creep)
-    }
-    return creepList;
 }
 
 function createCreep(spawn) {
@@ -90,8 +83,6 @@ function generateCreep(roomLevel, buildableCreepRole, role, creepList) {
 }
 
 
-function getBodyParts(spawn) {
-}
 
 function getCreepName(role) {
     return role.charAt(0).toUpperCase() + "_" + generateRandomString(5);
@@ -106,122 +97,6 @@ function generateRandomString(length) {
     return result;
 }
 
-function getAssignedSource(creep) {
-    return Game.getObjectById(creep.memory.sourceId);
-
-}
-
-function getClosestDroppedResource(creep) {
-    const droppedResourceEnergies = creep.room.find(FIND_DROPPED_RESOURCES, {
-        filter: (resource) => {
-            return resource.resourceType === RESOURCE_ENERGY && resource.amount > 150;
-        }
-    });
-    return creep.pos.findClosestByRange(droppedResourceEnergies);
-}
-
-function getClosestSpawn(creep) {
-
-    const spawns = creep.room.find(FIND_MY_STRUCTURES, {
-        filter: (structure) => {
-            return (structure.structureType === STRUCTURE_SPAWN && structure.store.getFreeCapacity())
-        }
-    });
-    return creep.pos.findClosestByRange(spawns);
-}
-
-function getClosestExtension(creep) {
-    const extensions = creep.room.find(FIND_MY_STRUCTURES, {
-        filter: (structure) => {
-            return (structure.structureType === STRUCTURE_EXTENSION && structure.store.getFreeCapacity())
-        }
-    });
-    return creep.pos.findClosestByRange(extensions);
-}
-
-function getClosestContainer(creep) {
-    const structures = creep.room.find(FIND_STRUCTURES, {
-        filter: (structure) => {
-            return (structure.structureType === STRUCTURE_CONTAINER && structure.store.getUsedCapacity() > 150)
-        }
-    });
-    return creep.pos.findClosestByRange(structures);
-}
-
-
-function getClosestEnergyStructure(creep, type) {
-    const structures = creep.room.find(FIND_STRUCTURES, {
-        filter: (structure) => {
-            return (structure.structureType === type && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0)
-        }
-    });
-    return creep.pos.findClosestByRange(structures);
-}
-
-function getMyClosestBasicStructure(creep, type) {
-    const structures = creep.room.find(FIND_MY_STRUCTURES, {
-        filter: (structure) => {
-            return (structure.structureType === type)
-        }
-    });
-    return creep.pos.findClosestByRange(structures);
-}
-
-function getClosestBasicStructure(creep, type) {
-
-    const structures = creep.room.find(FIND_STRUCTURES, {
-        filter: (structure) => {
-            return (structure.structureType === type)
-        }
-    });
-    return creep.pos.findClosestByRange(structures);
-}
-
-
-function getClosestSite(creep, type) {
-    const sites = creep.room.find(FIND_MY_CONSTRUCTION_SITES, {
-        filter: (site) => {
-            return (site.structureType === type)
-        }
-    });
-    return creep.pos.findClosestByRange(sites);
-}
-
-function getClosestTower(creep) {
-    const towers = creep.room.find(FIND_MY_STRUCTURES, {
-        filter: (structure) => {
-            return (structure.structureType === STRUCTURE_TOWER && structure.store.getFreeCapacity(RESOURCE_ENERGY))
-        }
-    });
-    return creep.pos.findClosestByRange(towers);
-}
-
-function getClosestRoad(creep) {
-    const roads = creep.room.find(FIND_MY_STRUCTURES, {
-        filter: (structure) => {
-            return (structure.structureType === STRUCTURE_ROAD)
-        }
-    });
-    return creep.pos.findClosestByRange(roads);
-}
-
-function getClosestStorage(creep) {
-    const storages = creep.room.find(FIND_MY_STRUCTURES, {
-        filter: (structure) => {
-            return (structure.structureType === STRUCTURE_STORAGE && structure.store.getUsedCapacity(RESOURCE_ENERGY))
-        }
-    });
-    return creep.pos.findClosestByRange(storages);
-}
-
-function getClosestTerminal(creep) {
-    const terminal = creep.room.find(FIND_MY_STRUCTURES, {
-        filter: (structure) => {
-            return (structure.structureType === STRUCTURE_TERMINAL);
-        }
-    });
-    return creep.pos.findClosestByRange(terminal);
-}
 
 function pickUpResource(creep, resource) {
     var able2Pickup = false;
@@ -246,17 +121,30 @@ function harvestStructure(creep, structure) {
     return able2Harvest
 }
 
-function withdrawFromStructure(creep, structure) {
+function withdrawFromStructure(creep, structure, resourceType) {
     var able2Withdraw = false;
     if (structure) {
         able2Withdraw = true
-        if (creep.withdraw(structure, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+        if (creep.withdraw(structure, resourceType) === ERR_NOT_IN_RANGE) {
             creep.moveTo(structure);
         }
     }
 
     return able2Withdraw
 }
+
+function withdrawFromStorage(creep, structure, resourceType) {
+    var able2Withdraw = false;
+    if (structure && Structures.canWithdrawFromStorage(structure, resourceType)) {
+        able2Withdraw = true;
+        if (creep.withdraw(structure, resourceType) === ERR_NOT_IN_RANGE) {
+            creep.moveTo(structure);
+        }
+
+    }
+    return able2Withdraw
+}
+
 
 function upgradeRoomController(creep) {
     if (creep.room.controller) {
@@ -341,36 +229,6 @@ function hasLink(creep) {
     return creep.memory.linked
 }
 
-function creepIsLinked(spawn, creep) {
-    var isLinked = false
-
-    if (creep.components.role === CREEP_ROLES.HARVESTER) {
-        const creepsInRoom = spawn.room.find(FIND_MY_CREEPS).filter(creepInRoom => creepInRoom.memory.role === CREEP_ROLES.TRANSPORTER);
-        if (creepsInRoom.length) {
-            isLinked = true;
-        }
-    }
-
-    if (creep.components.role === CREEP_ROLES.TRANSPORTER) {
-        isLinked = resetHarvesterLinks(spawn)
-    }
-
-
-    return isLinked;
-}
-
-function resetHarvesterLinks(spawn) {
-    const harvestersInRoom = spawn.room.find(FIND_MY_CREEPS).filter(creepInRoom => creepInRoom.memory.role === CREEP_ROLES.HARVESTER);
-
-    if (harvestersInRoom.length) {
-        for (const i in harvestersInRoom) {
-            harvestersInRoom[i].memory.linked = true;
-        }
-        return true;
-    }
-    return false
-}
-
 function resetTransporterLinks(spawn) {
     const transportersInRoom = spawn.room.find(FIND_MY_CREEPS).filter(creepInRoom => creepInRoom.memory.role === CREEP_ROLES.TRANSPORTER);
     const harvestersInRoom = spawn.room.find(FIND_MY_CREEPS).filter(creepInRoom => creepInRoom.memory.role === CREEP_ROLES.HARVESTER);
@@ -389,39 +247,25 @@ function resetTransporterLinks(spawn) {
 }
 
 
+
+
+
 module.exports = {
     resetTransporterLinks,
-    resetHarvesterLinks,
-    creepIsLinked,
     hasLink,
     canBuild,
-    getCreepName,
     canHarvest,
     repairStructure,
     setMemoryBuildingState,
     setMemoryHarvestingState,
     setMemoryHome,
-    getClosestBasicStructure,
     buildStructure,
     transfer2Structure,
     upgradeRoomController,
     withdrawFromStructure,
     harvestStructure,
     pickUpResource,
-    getClosestTerminal,
-    getClosestStorage,
-    getClosestRoad,
-    getClosestTower,
-    getClosestSite,
-    getMyClosestBasicStructure,
-    getClosestEnergyStructure,
-    getClosestExtension,
-    getClosestSpawn,
-    getClosestDroppedResource,
-    getAssignedSource,
-    getBodyParts,
+    withdrawFromStorage,
     createCreep,
-    CREEP_ROLES,
-    getCreepsList,
-    getClosestContainer
+    CREEP_ROLES
 };

@@ -1,7 +1,8 @@
 const Creeps = require("./creep");
+const Structures = require("./structures");
 let creep;
 let storage;
-let source;
+let container;
 
 function run (selectedCreep) {
     creep = selectedCreep;
@@ -12,9 +13,9 @@ function run (selectedCreep) {
 
     if (Creeps.canHarvest(creep)) {
         if (storage) {
-            Creeps.withdrawFromStructure(creep, storage);
+            Creeps.withdrawFromStorage(creep, storage, RESOURCE_ENERGY);
         } else
-            Creeps.harvestStructure(creep, source);
+            Creeps.withdrawFromStructure(creep, container, RESOURCE_ENERGY);
     } else {
         Creeps.upgradeRoomController(creep)
     }
@@ -28,8 +29,8 @@ function setMemory() {
 }
 
 function setClosestStructures() {
-    source = Creeps.getAssignedSource(creep);
-    storage = Creeps.getClosestEnergyStructure(creep, STRUCTURE_STORAGE);
+    storage = Structures.getClosestStorage(creep);
+    container = Structures.getClosestContainer(creep);
 
 }
 

@@ -1,5 +1,6 @@
 const controller = require("./controller")
 const Creeps = require("./creep");
+const Structures = require("./structures");
 let creep;
 let spawn;
 let extension;
@@ -15,7 +16,6 @@ function run(selectedCreep) {
     setMemory();
     setClosestStructures()
     if (!controller.setControllerSign(creep)) {
-
 
         if (Creeps.canHarvest(creep)) {
             Creeps.harvestStructure(creep, source);
@@ -37,11 +37,8 @@ function run(selectedCreep) {
                 }
 
             } else {
-
                 runDefaultTransfermode()
-
             }
-
 
         }
     }
@@ -54,14 +51,13 @@ function setMemory() {
 }
 
 function setClosestStructures() {
-    source = Creeps.getAssignedSource(creep);
-    spawn = Creeps.getClosestEnergyStructure(creep, STRUCTURE_SPAWN);
-    extension = Creeps.getClosestEnergyStructure(creep, STRUCTURE_EXTENSION);
-    tower = Creeps.getClosestEnergyStructure(creep, STRUCTURE_TOWER);
-    storage = Creeps.getClosestEnergyStructure(creep, STRUCTURE_STORAGE);
-    container = Creeps.getClosestBasicStructure(creep, STRUCTURE_CONTAINER);
+    source = Structures.getAssignedSource(creep);
+    spawn = Structures.getClosestEnergyStructure(creep, STRUCTURE_SPAWN);
+    extension = Structures.getClosestEnergyStructure(creep, STRUCTURE_EXTENSION);
+    tower = Structures.getClosestEnergyStructure(creep, STRUCTURE_TOWER);
+    storage = Structures.getClosestEnergyStructure(creep, STRUCTURE_STORAGE);
+    container = Structures.getClosestBasicStructure(creep, STRUCTURE_CONTAINER);
 }
-
 
 function runDefaultTransfermode() {
     if (Creeps.transfer2Structure(creep, extension)) {
