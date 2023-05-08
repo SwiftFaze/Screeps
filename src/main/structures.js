@@ -77,6 +77,17 @@ function getMyClosestBasicStructure(creep, type) {
     return creep.pos.findClosestByRange(structures);
 }
 
+function getMyClosestRepairableBasicStructure(creep, type) {
+    const structures = creep.room.find(FIND_MY_STRUCTURES, {
+        filter: (structure) => {
+            return (structure.structureType === type && structure.hits === structure.hitsMax)
+        }
+    });
+    return creep.pos.findClosestByRange(structures);
+}
+
+
+
 function getClosestBasicStructure(creep, type) {
 
     const structures = creep.room.find(FIND_STRUCTURES, {
@@ -143,6 +154,7 @@ module.exports = {
     getClosestSite,
     getMyClosestBasicStructure,
     getClosestEnergyStructure,
+    getMyClosestBasicStructure,
     getClosestExtension,
     getClosestSpawn,
     getClosestDroppedResource,

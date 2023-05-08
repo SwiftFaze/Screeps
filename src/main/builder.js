@@ -33,7 +33,7 @@ function run(selectedCreep) {
         Creeps.transfer2Structure(creep, storage)
 
     } else {
-        if(Structures.canWithdrawFromStorage(storage, RESOURCE_ENERGY)){
+        if (Structures.canWithdrawFromStorage(storage, RESOURCE_ENERGY)) {
             if (Creeps.withdrawFromStructure(creep, storage, RESOURCE_ENERGY)) {
                 return;
             }
@@ -52,23 +52,34 @@ function setMemory() {
 
 function setClosestStructures() {
     source = Structures.getAssignedSource(creep);
+
     extension = Structures.getClosestEnergyStructure(creep, STRUCTURE_EXTENSION);
     extensionSite = Structures.getClosestSite(creep, STRUCTURE_EXTENSION);
+
     tower = Structures.getClosestEnergyStructure(creep, STRUCTURE_TOWER);
     towerSite = Structures.getClosestSite(creep, STRUCTURE_TOWER);
-    road = Structures.getMyClosestBasicStructure(creep, STRUCTURE_ROAD);
+
+    road = Structures.getMyClosestRepairableBasicStructure(creep, STRUCTURE_ROAD);
     roadSite = Structures.getClosestSite(creep, STRUCTURE_ROAD);
-    storage = Structures.getClosestStorage(creep);
+
+    storage = Structures.getClosestStorage(creep)
     storageSite = Structures.getClosestSite(creep, STRUCTURE_STORAGE);
-    rampart = Structures.getMyClosestBasicStructure(creep, STRUCTURE_RAMPART);
+
+    rampart = Structures.getMyClosestRepairableBasicStructure(creep, STRUCTURE_RAMPART);
     rampartSite = Structures.getClosestSite(creep, STRUCTURE_RAMPART);
+
     container = Structures.getClosestContainer(creep);
     containerSite = Structures.getClosestSite(creep, STRUCTURE_CONTAINER);
-    wall = Structures.getMyClosestBasicStructure(creep, STRUCTURE_WALL);
+
+    wall = Structures.getMyClosestRepairableBasicStructure(creep, STRUCTURE_WALL);
     wallSite = Structures.getClosestSite(creep, STRUCTURE_WALL);
+
     resourceEnergy = Structures.getClosestDroppedResource(creep, RESOURCE_ENERGY);
 
 }
+
+
+
 
 function buildStructures() {
     if (Creeps.buildStructure(creep, containerSite)) {
@@ -77,16 +88,17 @@ function buildStructures() {
     if (Creeps.buildStructure(creep, extensionSite)) {
         return true;
     }
-    if (Creeps.buildStructure(creep, storageSite)) {
-        return true;
-    }
     if (Creeps.buildStructure(creep, towerSite)) {
         return true;
     }
     if (Creeps.buildStructure(creep, roadSite)) {
         return true;
     }
-    return Creeps.buildStructure(creep, rampartSite);
+    if (Creeps.buildStructure(creep, rampartSite)) {
+        return true;
+    }
+    return Creeps.buildStructure(creep, storageSite);
+
 
 }
 
