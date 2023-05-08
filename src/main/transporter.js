@@ -42,9 +42,7 @@ function run(selectedCreep) {
         if (Creeps.transfer2Structure(creep, storage)) {
             return;
         }
-        if (isClosestStucture(controllerDistance, extensionDistance, towerDistance, storageDistance, spawnDistance)) {
-            Creeps.upgradeRoomController(creep)
-        }
+        Creeps.upgradeRoomController(creep)
     }
 
 }

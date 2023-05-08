@@ -25,10 +25,12 @@ function run(selectedCreep) {
     setClosestStructures();
     if (Creeps.canBuild(creep)) {
         if (buildStructures()) {
-
-        } else {
-            repairStructures();
+            return;
         }
+        if (repairStructures()) {
+            return;
+        }
+        Creeps.upgradeRoomController(creep)
 
     } else {
         if (Creeps.withdrawFromStructure(creep, storage, RESOURCE_ENERGY)) {
