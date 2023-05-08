@@ -84,7 +84,7 @@ const creepBuilds = {
         harvester: {
             priority: 1,
             quantity: 100,
-            body: [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, MOVE]
+            body: [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, MOVE]
         }, transporter: {
             priority: 2,
             quantity: 2,
