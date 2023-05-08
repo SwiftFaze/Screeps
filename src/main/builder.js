@@ -2,19 +2,26 @@ const Creeps = require("./creep")
 const Structures = require("./structures")
 let creep;
 let storage;
+let storage2Repair;
 let storageSite;
 let road;
+let road2Repair;
 let roadSite;
 let extension;
+let extension2Repair;
 let extensionSite
 let tower;
+let tower2Repair;
 let towerSite;
 let source;
 let rampart;
+let rampart2Repair;
 let rampartSite;
 let container;
+let container2Repair;
 let containerSite;
 let wall;
+let wall2Repair;
 let wallSite;
 let resourceEnergy;
 
@@ -54,24 +61,30 @@ function setClosestStructures() {
     source = Structures.getAssignedSource(creep);
 
     extension = Structures.getClosestEnergyStructure(creep, STRUCTURE_EXTENSION);
+    extension2Repair = Structures.getClosestRepairableEnergyStructure(creep, STRUCTURE_EXTENSION);
     extensionSite = Structures.getClosestSite(creep, STRUCTURE_EXTENSION);
 
     tower = Structures.getClosestEnergyStructure(creep, STRUCTURE_TOWER);
+    tower2Repair = Structures.getClosestRepairableEnergyStructure(creep, STRUCTURE_TOWER);
     towerSite = Structures.getClosestSite(creep, STRUCTURE_TOWER);
 
-    road = Structures.getMyClosestRepairableBasicStructure(creep, STRUCTURE_ROAD);
+    road = Structures.getMyClosestBasicStructure(creep, STRUCTURE_ROAD);
+    road2Repair = Structures.getMyClosestRepairableBasicStructure(creep, STRUCTURE_ROAD);
     roadSite = Structures.getClosestSite(creep, STRUCTURE_ROAD);
 
     storage = Structures.getClosestStorage(creep)
     storageSite = Structures.getClosestSite(creep, STRUCTURE_STORAGE);
 
-    rampart = Structures.getMyClosestRepairableBasicStructure(creep, STRUCTURE_RAMPART);
+    rampart = Structures.getMyClosestBasicStructure(creep, STRUCTURE_RAMPART);
+    rampart2Repair = Structures.getMyClosestRepairableBasicStructure(creep, STRUCTURE_RAMPART);
     rampartSite = Structures.getClosestSite(creep, STRUCTURE_RAMPART);
 
-    container = Structures.getMyClosestRepairableContainer(creep);
+    container = Structures.getClosestContainer(creep);
+    container2Repair = Structures.getMyClosestRepairableContainer(creep);
     containerSite = Structures.getClosestSite(creep, STRUCTURE_CONTAINER);
 
-    wall = Structures.getMyClosestRepairableBasicStructure(creep, STRUCTURE_WALL);
+    wall = Structures.getMyClosestBasicStructure(creep, STRUCTURE_WALL);
+    wall2Repair = Structures.getMyClosestRepairableBasicStructure(creep, STRUCTURE_WALL);
     wallSite = Structures.getClosestSite(creep, STRUCTURE_WALL);
 
     resourceEnergy = Structures.getClosestDroppedResource(creep, RESOURCE_ENERGY);
@@ -103,22 +116,22 @@ function buildStructures() {
 }
 
 function repairStructures() {
-    if (Creeps.repairStructure(creep, container)) {
+    if (Creeps.repairStructure(creep, container2Repair)) {
         return true;
     }
-    if (Creeps.repairStructure(creep, extension)) {
+    if (Creeps.repairStructure(creep, extension2Repair)) {
         return true;
     }
-    if (Creeps.repairStructure(creep, storage)) {
+    if (Creeps.repairStructure(creep, storage2Repair)) {
         return true;
     }
-    if (Creeps.repairStructure(creep, tower)) {
+    if (Creeps.repairStructure(creep, tower2Repair)) {
         return true;
     }
-    if (Creeps.repairStructure(creep, road)) {
+    if (Creeps.repairStructure(creep, road2Repair)) {
         return true;
     }
-    return Creeps.repairStructure(creep, rampart);
+    return Creeps.repairStructure(creep, rampart2Repair);
 
 }
 
