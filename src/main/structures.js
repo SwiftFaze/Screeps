@@ -154,7 +154,7 @@ module.exports = {
     getClosestSite,
     getMyClosestBasicStructure,
     getClosestEnergyStructure,
-    getMyClosestBasicStructure,
+    getMyClosestRepairableBasicStructure,
     getClosestExtension,
     getClosestSpawn,
     getClosestDroppedResource,
