@@ -23,11 +23,13 @@ function run(selectedCreep) {
 
 
     if (Creeps.canHarvest(creep)) {
+        creep.memory.hasWithdrawnFromStorage = false;
         if (Creeps.withdrawFromStructure(creep, container, RESOURCE_ENERGY)) {
             return;
         }
         if (Structures.canWithdrawFromStorage(storage, RESOURCE_ENERGY)) {
             if (Creeps.withdrawFromStructure(creep, storage, RESOURCE_ENERGY)) {
+                creep.memory.hasWithdrawnFromStorage = true;
                 return;
             }
         }
@@ -44,9 +46,12 @@ function run(selectedCreep) {
         if (Creeps.transfer2Structure(creep, tower)) {
             return;
         }
-        if (Creeps.transfer2Structure(creep, storage)) {
-            return;
+        if (!creep.memory.hasWithdrawnFromStorage) {
+            if (Creeps.transfer2Structure(creep, storage)) {
+                return;
+            }
         }
+
         Creeps.upgradeRoomController(creep)
     }
 
