@@ -84,7 +84,7 @@ const creepBuilds = {
         harvester: {
             priority: 1,
             quantity: 100,
-            body: [WORK, WORK, WORK, WORK, WORK, WORK, WORK, MOVE, CARRY]
+            body: [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, MOVE]
         }, transporter: {
             priority: 2,
             quantity: 2,
@@ -92,11 +92,11 @@ const creepBuilds = {
         }, upgrader: {
             priority: 3,
             quantity: 6,
-            body: [MOVE, MOVE, MOVE, MOVE, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY]
+            body: [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE]
         }, builder: {
             priority: 4,
             quantity: 2,
-            body: [MOVE, MOVE, MOVE, MOVE, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY]
+            body: [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE]
         }
     }
 
