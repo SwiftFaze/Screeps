@@ -4,13 +4,13 @@ const Structures = require("./structures")
 const CREEP_ROLES = {
     HARVESTER: 'harvester',
     TRANSPORTER: 'transporter',
+    UPGRADER: 'upgrader',
     BUILDER: 'builder',
     ATTACKER: 'attacker',
     RANGED_ATTACKER: 'ranged_attacker',
     HEALER: 'healer',
     TANK: 'tank',
-    CLAIMER: 'claimer',
-    UPGRADER: 'upgrader'
+    CLAIMER: 'claimer'
 }
 
 class MyCreep {
