@@ -30,7 +30,8 @@ function run(selectedCreep) {
         if (repairStructures()) {
             return;
         }
-        Creeps.upgradeRoomController(creep)
+        Creeps.transfer2Structure(creep, storage)
+
 
     } else {
         if (Creeps.withdrawFromStructure(creep, storage, RESOURCE_ENERGY)) {
