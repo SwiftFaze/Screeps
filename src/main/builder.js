@@ -69,14 +69,14 @@ function setClosestStructures() {
     towerSite = Structures.getClosestSite(creep, STRUCTURE_TOWER);
 
     road = Structures.getMyClosestBasicStructure(creep, STRUCTURE_ROAD);
-    road2Repair = Structures.getMyClosestRepairableBasicStructure(creep, STRUCTURE_ROAD);
+    road2Repair = Structures.getClosestRepairableBasicStructure(creep, STRUCTURE_ROAD);
     roadSite = Structures.getClosestSite(creep, STRUCTURE_ROAD);
 
     storage = Structures.getClosestStorage(creep)
     storageSite = Structures.getClosestSite(creep, STRUCTURE_STORAGE);
 
     rampart = Structures.getMyClosestBasicStructure(creep, STRUCTURE_RAMPART);
-    rampart2Repair = Structures.getMyClosestRepairableBasicStructure(creep, STRUCTURE_RAMPART);
+    rampart2Repair = Structures.getClosestRepairableBasicStructure(creep, STRUCTURE_RAMPART);
     rampartSite = Structures.getClosestSite(creep, STRUCTURE_RAMPART);
 
     container = Structures.getClosestContainer(creep);
@@ -84,7 +84,7 @@ function setClosestStructures() {
     containerSite = Structures.getClosestSite(creep, STRUCTURE_CONTAINER);
 
     wall = Structures.getMyClosestBasicStructure(creep, STRUCTURE_WALL);
-    wall2Repair = Structures.getMyClosestRepairableBasicStructure(creep, STRUCTURE_WALL);
+    wall2Repair = Structures.getClosestRepairableBasicStructure(creep, STRUCTURE_WALL);
     wallSite = Structures.getClosestSite(creep, STRUCTURE_WALL);
 
     resourceEnergy = Structures.getClosestDroppedResource(creep, RESOURCE_ENERGY);
