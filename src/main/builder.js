@@ -68,7 +68,7 @@ function setClosestStructures() {
     rampart = Structures.getMyClosestRepairableBasicStructure(creep, STRUCTURE_RAMPART);
     rampartSite = Structures.getClosestSite(creep, STRUCTURE_RAMPART);
 
-    container = Structures.getClosestContainer(creep);
+    container = Structures.getMyClosestRepairableContainer(creep);
     containerSite = Structures.getClosestSite(creep, STRUCTURE_CONTAINER);
 
     wall = Structures.getMyClosestRepairableBasicStructure(creep, STRUCTURE_WALL);
