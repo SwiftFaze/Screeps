@@ -7,6 +7,7 @@ let extension;
 let storage;
 let tower;
 let container;
+let resourceEnergy;
 let source;
 
 
@@ -16,34 +17,26 @@ function run(selectedCreep) {
     setMemory();
     setClosestStructures()
     if (!controller.setControllerSign(creep)) {
-
         if (Creeps.canHarvest(creep)) {
-            Creeps.harvestStructure(creep, source);
-
+            if (source.energy === 0) {
+                if (creep.pos.getRangeTo(resourceEnergy) < 10) {
+                    Creeps.pickUpResource(creep, resourceEnergy);
+                }
+            } else {
+                Creeps.harvestStructure(creep, source)
+            }
         } else {
             if (Creeps.hasLink(creep)) {
-                if (container) {
-                    if (creep.pos.getRangeTo(container) < 10) {
-                        if (container.store.getFreeCapacity() !== 0) {
-                            Creeps.transfer2Structure(creep, container);
-                        } else {
-                            creep.drop(RESOURCE_ENERGY);
-                        }
-                    } else {
-                        creep.drop(RESOURCE_ENERGY);
-                    }
+                if (Creeps.transfer2Structure(creep, container)) {
                 } else {
                     creep.drop(RESOURCE_ENERGY);
                 }
-
             } else {
                 runDefaultTransfermode()
             }
-
         }
     }
 }
-
 
 function setMemory() {
     Creeps.setMemoryHome(creep)
@@ -56,7 +49,8 @@ function setClosestStructures() {
     extension = Structures.getClosestEnergyStructure(creep, STRUCTURE_EXTENSION);
     tower = Structures.getClosestEnergyStructure(creep, STRUCTURE_TOWER);
     storage = Structures.getClosestEnergyStructure(creep, STRUCTURE_STORAGE);
-    container = Structures.getClosestBasicStructure(creep, STRUCTURE_CONTAINER);
+    container = Structures.getClosestEnergyStructure(creep, STRUCTURE_CONTAINER);
+    resourceEnergy = Structures.getClosestDroppedResource(creep, RESOURCE_ENERGY);
 }
 
 function runDefaultTransfermode() {
