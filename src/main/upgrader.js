@@ -12,9 +12,12 @@ function run (selectedCreep) {
 
 
     if (Creeps.canHarvest(creep)) {
-        if (storage) {
-            Creeps.withdrawFromStorage(creep, storage, RESOURCE_ENERGY);
-        } else
+
+        if(Structures.canWithdrawFromStorage(storage, RESOURCE_ENERGY)){
+            if (Creeps.withdrawFromStructure(creep, storage, RESOURCE_ENERGY)) {
+                return;
+            }
+        }
             Creeps.withdrawFromStructure(creep, container, RESOURCE_ENERGY);
     } else {
         Creeps.upgradeRoomController(creep)

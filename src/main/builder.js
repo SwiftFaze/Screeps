@@ -32,20 +32,16 @@ function run(selectedCreep) {
         }
         Creeps.transfer2Structure(creep, storage)
 
-
     } else {
-        if (Creeps.withdrawFromStructure(creep, storage, RESOURCE_ENERGY)) {
-            return;
+        if(Structures.canWithdrawFromStorage(storage, RESOURCE_ENERGY)){
+            if (Creeps.withdrawFromStructure(creep, storage, RESOURCE_ENERGY)) {
+                return;
+            }
         }
         if (Creeps.withdrawFromStructure(creep, container, RESOURCE_ENERGY)) {
             return;
         }
-        if (Creeps.harvestStructure(creep, storage)) {
-            return;
-        }
         Creeps.pickUpResource(creep, resourceEnergy)
-
-
     }
 }
 
@@ -62,7 +58,7 @@ function setClosestStructures() {
     towerSite = Structures.getClosestSite(creep, STRUCTURE_TOWER);
     road = Structures.getMyClosestBasicStructure(creep, STRUCTURE_ROAD);
     roadSite = Structures.getClosestSite(creep, STRUCTURE_ROAD);
-    storage = Structures.getClosestEnergyStructure(creep, STRUCTURE_STORAGE);
+    storage = Structures.getClosestStorage(creep);
     storageSite = Structures.getClosestSite(creep, STRUCTURE_STORAGE);
     rampart = Structures.getMyClosestBasicStructure(creep, STRUCTURE_RAMPART);
     rampartSite = Structures.getClosestSite(creep, STRUCTURE_RAMPART);
