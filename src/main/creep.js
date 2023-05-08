@@ -74,16 +74,6 @@ function createCreep(spawn) {
 }
 
 
-function generateCreep(roomLevel, buildableCreepRole, role, creepList) {
-    if (CreepComponents.creepBuilds[roomLevel][buildableCreepRole].quantity > creepList.filter(creep => creep.memory.role === role).length) {
-        const creepComponents = CreepComponents.getCreepComponents(roomLevel, role);
-        return new MyCreep(getCreepName(creepComponents.role), creepComponents);
-    }
-    return null;
-}
-
-
-
 function getCreepName(role) {
     return role.charAt(0).toUpperCase() + "_" + generateRandomString(5);
 }
@@ -246,6 +236,13 @@ function resetTransporterLinks(spawn) {
 
 }
 
+function withdrawAll(creep, structure) {
+    const structureStore = structure.store;
+
+    for (const resourceType in structureStore) {
+        withdrawFromStructure(creep, structure, structureStore[resourceType])
+    }
+}
 
 
 
@@ -253,6 +250,7 @@ function resetTransporterLinks(spawn) {
 module.exports = {
     resetTransporterLinks,
     hasLink,
+    withdrawAll,
     canBuild,
     canHarvest,
     repairStructure,
