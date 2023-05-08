@@ -200,7 +200,7 @@ function repairStructure(creep, structure) {
     var able2Build = false;
     if (structure) {
         able2Build = true;
-        if (creep.build(structure) === ERR_NOT_IN_RANGE) {
+        if (creep.repair(structure) === ERR_NOT_IN_RANGE) {
             creep.moveTo(structure);
         }
     }
