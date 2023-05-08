@@ -80,7 +80,7 @@ function getMyClosestBasicStructure(creep, type) {
 function getMyClosestRepairableBasicStructure(creep, type) {
     const structures = creep.room.find(FIND_MY_STRUCTURES, {
         filter: (structure) => {
-            return (structure.structureType === type && structure.hits === structure.hitsMax)
+            return (structure.structureType === type && structure.hits !== structure.hitsMax)
         }
     });
     return creep.pos.findClosestByRange(structures);
