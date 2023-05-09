@@ -116,6 +116,7 @@ const creepBuilds = {
             quantity: 2,
             body: [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE]
         }
+    }
 
 }
 
