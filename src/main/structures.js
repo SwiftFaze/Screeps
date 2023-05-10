@@ -170,9 +170,12 @@ function getClosestTerminal(creep) {
     return creep.pos.findClosestByRange(terminal);
 }
 
-
+function isNot2Far(creep, structure) {
+    return creep.pos.getRangeTo(structure) < 10
+}
 module.exports = {
     getClosestBasicStructure,
+    isNot2Far,
     getClosestTerminal,
     getClosestStorage,
     getClosestRoad,

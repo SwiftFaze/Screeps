@@ -19,7 +19,7 @@ function run(selectedCreep) {
     if (!controller.setControllerSign(creep)) {
         if (Creeps.canHarvest(creep)) {
             if (source.energy === 0) {
-                if (creep.pos.getRangeTo(resourceEnergy) < 10) {
+                if (Structures.isNot2Far(creep, resourceEnergy)) {
                     Creeps.pickUpResource(creep, resourceEnergy);
                 }
             } else {
@@ -27,7 +27,8 @@ function run(selectedCreep) {
             }
         } else {
             if (Creeps.hasLink(creep)) {
-                if (Creeps.transfer2Structure(creep, container)) {
+                if (Structures.isNot2Far(creep, container)) {
+                    Creeps.transfer2Structure(creep, container)
                 } else {
                     creep.drop(RESOURCE_ENERGY);
                 }
@@ -37,6 +38,9 @@ function run(selectedCreep) {
         }
     }
 }
+
+
+
 
 function setMemory() {
     Creeps.setMemoryHome(creep)
