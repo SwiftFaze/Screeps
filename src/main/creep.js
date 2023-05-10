@@ -56,7 +56,13 @@ function createCreep(spawn) {
                             }
                         }
                     } else {
-                        if (CreepComponents.creepBuilds[roomLevel][buildableCreepRole].quantity > creepList.filter(creep => creep.memory.role === role).length) {
+                        const currentCreepAmount = creepList.filter(creep => creep.memory.role === role).length
+
+                        if (currentCreepAmount === 0 && role === CREEP_ROLES.TRANSPORTER) {
+                            creepComponents = CreepComponents.getCreepComponents(1, role);
+                            creepName = getCreepName(creepComponents.role);
+                            return new MyCreep(creepName, creepComponents);
+                        } else if (CreepComponents.creepBuilds[roomLevel][buildableCreepRole].quantity > currentCreepAmount) {
                             creepComponents = CreepComponents.getCreepComponents(roomLevel, role);
                             creepName = getCreepName(creepComponents.role);
                             return new MyCreep(creepName, creepComponents);
@@ -243,8 +249,6 @@ function withdrawAll(creep, structure) {
         withdrawFromStructure(creep, structure, structureStore[resourceType])
     }
 }
-
-
 
 
 module.exports = {
