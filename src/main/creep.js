@@ -57,11 +57,8 @@ function createCreep(spawn) {
                         }
                     } else {
                         const currentCreepAmount = creepList.filter(creep => creep.memory.role === role).length
-
                         if (currentCreepAmount === 0 && role === CREEP_ROLES.TRANSPORTER) {
-                            creepComponents = CreepComponents.getCreepComponents(1, role);
-                            creepName = getCreepName(creepComponents.role);
-                            return new MyCreep(creepName, creepComponents);
+                            return new MyCreep(getCreepName(CREEP_ROLES.TRANSPORTER), CreepComponents.getCreepComponents(1, CREEP_ROLES.TRANSPORTER));
                         } else if (CreepComponents.creepBuilds[roomLevel][buildableCreepRole].quantity > currentCreepAmount) {
                             creepComponents = CreepComponents.getCreepComponents(roomLevel, role);
                             creepName = getCreepName(creepComponents.role);
