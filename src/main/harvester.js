@@ -27,8 +27,10 @@ function run(selectedCreep) {
             }
         } else {
             if (Creeps.hasLink(creep)) {
-                if (Structures.isNot2Far(creep, container)) {
-                    Creeps.transfer2Structure(creep, container)
+                if (source.energy === 0) {
+                    runDefaultTransfermode()
+                } else if (Structures.isNot2Far(creep, container)) {
+                    Creeps.transfer2Structure(creep, container);
                 } else {
                     creep.drop(RESOURCE_ENERGY);
                 }
@@ -38,8 +40,6 @@ function run(selectedCreep) {
         }
     }
 }
-
-
 
 
 function setMemory() {

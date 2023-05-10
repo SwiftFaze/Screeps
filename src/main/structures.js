@@ -171,8 +171,14 @@ function getClosestTerminal(creep) {
 }
 
 function isNot2Far(creep, structure) {
-    return creep.pos.getRangeTo(structure) < 10
+    if (structure) {
+        return creep.pos.getRangeTo(structure) < 10;
+    } else {
+        return false;
+    }
+
 }
+
 module.exports = {
     getClosestBasicStructure,
     isNot2Far,
