@@ -23,6 +23,9 @@ let containerSite;
 let wall;
 let wall2Repair;
 let wallSite;
+let link;
+let link2Repair;
+let linkSite;
 let resourceEnergy;
 
 
@@ -83,6 +86,11 @@ function setClosestStructures() {
     container2Repair = Structures.getMyClosestRepairableContainer(creep);
     containerSite = Structures.getClosestSite(creep, STRUCTURE_CONTAINER);
 
+    link = Structures.getClosestContainer(creep);
+    link2Repair = Structures.getClosestRepairableEnergyStructure(creep);
+    linkSite = Structures.getClosestSite(creep, STRUCTURE_LINK);
+
+
     wall = Structures.getMyClosestBasicStructure(creep, STRUCTURE_WALL);
     wall2Repair = Structures.getClosestRepairableBasicStructure(creep, STRUCTURE_WALL);
     wallSite = Structures.getClosestSite(creep, STRUCTURE_WALL);
@@ -90,8 +98,6 @@ function setClosestStructures() {
     resourceEnergy = Structures.getClosestDroppedResource(creep, RESOURCE_ENERGY);
 
 }
-
-
 
 
 function buildStructures() {
@@ -107,10 +113,13 @@ function buildStructures() {
     if (Creeps.buildStructure(creep, roadSite)) {
         return true;
     }
-    if (Creeps.buildStructure(creep, rampartSite)) {
+    if (Creeps.buildStructure(creep, storageSite)) {
         return true;
     }
-    return Creeps.buildStructure(creep, storageSite);
+    if (Creeps.buildStructure(creep, linkSite)) {
+        return true;
+    }
+    return Creeps.buildStructure(creep, rampartSite);
 
 
 }
@@ -126,6 +135,9 @@ function repairStructures() {
         return true;
     }
     if (Creeps.repairStructure(creep, tower2Repair)) {
+        return true;
+    }
+    if (Creeps.repairStructure(creep, link2Repair)) {
         return true;
     }
     if (Creeps.repairStructure(creep, road2Repair)) {
