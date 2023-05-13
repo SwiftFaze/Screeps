@@ -179,9 +179,43 @@ function isNot2Far(creep, structure) {
 
 }
 
+function getClosestLinkToStorage(room) {
+    const storage = room.storage;
+    if (!storage) return null; // No storage in the room
+
+    const links = room.find(FIND_MY_STRUCTURES, {
+        filter: {structureType: STRUCTURE_LINK}
+    });
+
+    const linksSortedByDistanceToStorage = _.sortBy(links, link => storage.pos.getRangeTo(link));
+    return linksSortedByDistanceToStorage[0];
+}
+
+
+function sourceIsDepleted(source) {
+    return source.energy === 0;
+
+}
+
+function getRoomLinkCount(room) {
+    var links = room.find(FIND_MY_STRUCTURES, {
+        filter: (structure) => {
+            return (structure.structureType === STRUCTURE_LINK)
+        }
+    });
+    if (links) {
+        return links.length;
+    } else {
+        return 0;
+    }
+}
+
 module.exports = {
     getClosestBasicStructure,
+    sourceIsDepleted,
+    getRoomLinkCount,
     isNot2Far,
+    getClosestLinkToStorage,
     getClosestTerminal,
     getClosestStorage,
     getClosestRoad,

@@ -9,6 +9,7 @@ let tower;
 let container;
 let resourceEnergy;
 let source;
+let link;
 
 
 function run(selectedCreep) {
@@ -18,21 +19,24 @@ function run(selectedCreep) {
     setClosestStructures()
     if (!controller.setControllerSign(creep)) {
         if (Creeps.canHarvest(creep)) {
-            if (source.energy === 0) {
-                if (Structures.isNot2Far(creep, resourceEnergy)) {
-                    Creeps.pickUpResource(creep, resourceEnergy);
+            if (Structures.sourceIsDepleted(source)) {
+                if (Structures.isNot2Far(creep, resourceEnergy) && Creeps.pickUpResource(creep, resourceEnergy)) {
                 }
             } else {
                 Creeps.harvestStructure(creep, source)
             }
         } else {
             if (Creeps.hasLink(creep)) {
-                if (source.energy === 0) {
+                if (Structures.sourceIsDepleted(source)) {
                     runDefaultTransfermode()
-                } else if (Structures.isNot2Far(creep, container)) {
-                    Creeps.transfer2Structure(creep, container);
                 } else {
-                    creep.drop(RESOURCE_ENERGY);
+                    if (Structures.isNot2Far(creep, link) && Creeps.transfer2Structure(creep, link)) {
+                    } else {
+                        if (Structures.isNot2Far(creep, container) && Creeps.transfer2Structure(creep, container)) {
+                        } else {
+                            creep.drop(RESOURCE_ENERGY);
+                        }
+                    }
                 }
             } else {
                 runDefaultTransfermode()
@@ -55,16 +59,23 @@ function setClosestStructures() {
     storage = Structures.getClosestEnergyStructure(creep, STRUCTURE_STORAGE);
     container = Structures.getClosestEnergyStructure(creep, STRUCTURE_CONTAINER);
     resourceEnergy = Structures.getClosestDroppedResource(creep, RESOURCE_ENERGY);
+    link = Structures.getClosestEnergyStructure(creep, STRUCTURE_LINK);
 }
 
 function runDefaultTransfermode() {
+    if (Creeps.transfer2Structure(creep, link)) {
+        return;
+    }
     if (Creeps.transfer2Structure(creep, extension)) {
         return;
     }
     if (Creeps.transfer2Structure(creep, spawn)) {
         return;
     }
-    Creeps.transfer2Structure(creep, tower)
+    if (Creeps.transfer2Structure(creep, tower)) {
+        return;
+    }
+    Creeps.transfer2Structure(creep, storage)
 
 }
 

@@ -5,6 +5,7 @@ let resourceEnergy;
 let source;
 let spawn;
 let extension;
+let link;
 let storage;
 let container;
 let tower;
@@ -13,6 +14,7 @@ let spawnDistance;
 let towerDistance;
 let storageDistance;
 let controllerDistance;
+let storageLink;
 
 
 function run(selectedCreep) {
@@ -24,16 +26,46 @@ function run(selectedCreep) {
 
     if (Creeps.canHarvest(creep)) {
         creep.memory.hasWithdrawnFromStorage = false;
-        if (Creeps.withdrawFromStructure(creep, container, RESOURCE_ENERGY)) {
-            return;
+
+        if (Structures.getRoomLinkCount(creep.room) > 2) {
+
         }
-        if (Structures.canWithdrawFromStorage(storage, RESOURCE_ENERGY)) {
-            if (Creeps.withdrawFromStructure(creep, storage, RESOURCE_ENERGY)) {
-                creep.memory.hasWithdrawnFromStorage = true;
+
+
+        if (Structures.getRoomLinkCount(creep.room) === 2) {
+            if (storageLink.store.getUsedCapacity(RESOURCE_ENERGY) !== 0) {
+                if (Creeps.withdrawFromStructure(creep, storageLink, RESOURCE_ENERGY)) {
+                    return;
+                }
+            }
+
+            if (Creeps.withdrawFromStructure(creep, container, RESOURCE_ENERGY)) {
                 return;
             }
+            if (Structures.canWithdrawFromStorage(storage, RESOURCE_ENERGY)) {
+                if (Creeps.withdrawFromStructure(creep, storage, RESOURCE_ENERGY)) {
+                    creep.memory.hasWithdrawnFromStorage = true;
+                    return;
+                }
+            }
+            Creeps.pickUpResource(creep, resourceEnergy);
+
+
         }
-        Creeps.pickUpResource(creep, resourceEnergy);
+
+
+        if (Structures.getRoomLinkCount(creep.room) < 2) {
+            if (Creeps.withdrawFromStructure(creep, container, RESOURCE_ENERGY)) {
+                return;
+            }
+            if (Structures.canWithdrawFromStorage(storage, RESOURCE_ENERGY)) {
+                if (Creeps.withdrawFromStructure(creep, storage, RESOURCE_ENERGY)) {
+                    creep.memory.hasWithdrawnFromStorage = true;
+                    return;
+                }
+            }
+            Creeps.pickUpResource(creep, resourceEnergy);
+        }
 
 
     } else {
@@ -67,35 +99,14 @@ function setClosestStructures() {
     source = Structures.getAssignedSource(creep);
     resourceEnergy = Structures.getClosestDroppedResource(creep, RESOURCE_ENERGY);
     spawn = Structures.getClosestEnergyStructure(creep, STRUCTURE_SPAWN);
+    link = Structures.getClosestEnergyStructure(creep, STRUCTURE_LINK);
     extension = Structures.getClosestEnergyStructure(creep, STRUCTURE_EXTENSION);
     tower = Structures.getClosestEnergyStructure(creep, STRUCTURE_TOWER);
     storage = Structures.getClosestEnergyStructure(creep, STRUCTURE_STORAGE);
     container = Structures.getClosestContainer(creep);
-
-    extensionDistance = creep.pos.getRangeTo(extension)
-    spawnDistance = creep.pos.getRangeTo(spawn)
-    towerDistance = creep.pos.getRangeTo(tower)
-    storageDistance = creep.pos.getRangeTo(storage)
-    controllerDistance = creep.pos.getRangeTo(creep.room.controller)
-
+    storageLink = Structures.getClosestLinkToStorage(creep.room);
 
 }
 
-function isClosestStucture(wantedStructure, s1, s2, s3) {
-    if (wantedStructure) {
-        if (!s1) {
-            s1 = 10000
-        }
-        if (!s2) {
-            s2 = 10000
-        }
-        if (!s3) {
-            s3 = 10000
-        }
-        return wantedStructure <= s1 && wantedStructure <= s2 && wantedStructure <= s3;
-    } else {
-        return false;
-    }
-}
 
 module.exports = {run};
