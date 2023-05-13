@@ -110,13 +110,13 @@ function buildStructures() {
     if (Creeps.buildStructure(creep, towerSite)) {
         return true;
     }
-    if (Creeps.buildStructure(creep, roadSite)) {
-        return true;
-    }
     if (Creeps.buildStructure(creep, storageSite)) {
         return true;
     }
     if (Creeps.buildStructure(creep, linkSite)) {
+        return true;
+    }
+    if (Creeps.buildStructure(creep, roadSite)) {
         return true;
     }
     return Creeps.buildStructure(creep, rampartSite);
@@ -131,10 +131,10 @@ function repairStructures() {
     if (Creeps.repairStructure(creep, extension2Repair)) {
         return true;
     }
-    if (Creeps.repairStructure(creep, storage2Repair)) {
+    if (Creeps.repairStructure(creep, tower2Repair)) {
         return true;
     }
-    if (Creeps.repairStructure(creep, tower2Repair)) {
+    if (Creeps.repairStructure(creep, storage2Repair)) {
         return true;
     }
     if (Creeps.repairStructure(creep, link2Repair)) {
