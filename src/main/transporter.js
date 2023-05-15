@@ -38,16 +38,14 @@ function run(selectedCreep) {
                     return;
                 }
             }
-
+            if (Creeps.withdrawFromStructure(creep, container, RESOURCE_ENERGY)) {
+                return;
+            }
             if (Structures.canWithdrawFromStorage(storage, RESOURCE_ENERGY)) {
                 if (Creeps.withdrawFromStructure(creep, storage, RESOURCE_ENERGY)) {
                     creep.memory.hasWithdrawnFromStorage = true;
                     return;
                 }
-            }
-
-            if (Creeps.withdrawFromStructure(creep, container, RESOURCE_ENERGY)) {
-                return;
             }
             Creeps.pickUpResource(creep, resourceEnergy);
 
