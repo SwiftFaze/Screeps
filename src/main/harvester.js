@@ -21,6 +21,9 @@ function run(selectedCreep) {
         if (Creeps.canHarvest(creep)) {
             if (Structures.sourceIsDepleted(source)) {
                 if (Structures.isNot2Far(creep, resourceEnergy) && Creeps.pickUpResource(creep, resourceEnergy)) {
+                    return;
+                }
+                if (Structures.isNot2Far(creep, container) && Creeps.transfer2Structure(creep, container)) {
                 }
             } else {
                 Creeps.harvestStructure(creep, source)
@@ -31,12 +34,12 @@ function run(selectedCreep) {
                     runDefaultTransfermode()
                 } else {
                     if (Structures.isNot2Far(creep, link) && Creeps.transfer2Structure(creep, link)) {
-                    } else {
-                        if (Structures.isNot2Far(creep, container) && Creeps.transfer2Structure(creep, container)) {
-                        } else {
-                            creep.drop(RESOURCE_ENERGY);
-                        }
+                        return;
                     }
+                    if (Structures.isNot2Far(creep, container) && Creeps.transfer2Structure(creep, container)) {
+                        return;
+                    }
+                    creep.drop(RESOURCE_ENERGY);
                 }
             } else {
                 runDefaultTransfermode()
