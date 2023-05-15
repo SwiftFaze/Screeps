@@ -49,10 +49,18 @@ function getClosestExtension(creep) {
     return creep.pos.findClosestByRange(extensions);
 }
 
-function getClosestContainer(creep) {
+function getClosestFullContainer(creep) {
     const structures = creep.room.find(FIND_STRUCTURES, {
         filter: (structure) => {
             return (structure.structureType === STRUCTURE_CONTAINER && structure.store.getUsedCapacity() > 150)
+        }
+    });
+    return creep.pos.findClosestByRange(structures);
+}
+function getClosestContainer(creep) {
+    const structures = creep.room.find(FIND_STRUCTURES, {
+        filter: (structure) => {
+            return (structure.structureType === STRUCTURE_CONTAINER)
         }
     });
     return creep.pos.findClosestByRange(structures);
@@ -214,6 +222,7 @@ module.exports = {
     getClosestBasicStructure,
     sourceIsDepleted,
     getRoomLinkCount,
+    getClosestContainer,
     isNot2Far,
     getClosestLinkToStorage,
     getClosestTerminal,
@@ -231,6 +240,6 @@ module.exports = {
     getClosestSpawn,
     getClosestDroppedResource,
     getAssignedSource,
-    getClosestContainer,
+    getClosestFullContainer: getClosestFullContainer,
     canWithdrawFromStorage
 };

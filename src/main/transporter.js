@@ -102,7 +102,7 @@ function setClosestStructures() {
     extension = Structures.getClosestEnergyStructure(creep, STRUCTURE_EXTENSION);
     tower = Structures.getClosestEnergyStructure(creep, STRUCTURE_TOWER);
     storage = Structures.getClosestEnergyStructure(creep, STRUCTURE_STORAGE);
-    container = Structures.getClosestContainer(creep);
+    container = Structures.getClosestFullContainer(creep);
     storageLink = Structures.getClosestLinkToStorage(creep.room);
 
 }

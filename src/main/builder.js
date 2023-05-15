@@ -82,11 +82,11 @@ function setClosestStructures() {
     rampart2Repair = Structures.getClosestRepairableBasicStructure(creep, STRUCTURE_RAMPART);
     rampartSite = Structures.getClosestSite(creep, STRUCTURE_RAMPART);
 
-    container = Structures.getClosestContainer(creep);
+    container = Structures.getClosestFullContainer(creep);
     container2Repair = Structures.getMyClosestRepairableContainer(creep);
     containerSite = Structures.getClosestSite(creep, STRUCTURE_CONTAINER);
 
-    link = Structures.getClosestContainer(creep);
+    link = Structures.getClosestFullContainer(creep);
     link2Repair = Structures.getClosestRepairableEnergyStructure(creep);
     linkSite = Structures.getClosestSite(creep, STRUCTURE_LINK);
 

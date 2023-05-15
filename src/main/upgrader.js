@@ -38,7 +38,7 @@ function setMemory() {
 
 function setClosestStructures() {
     storage = Structures.getClosestStorage(creep);
-    container = Structures.getClosestContainer(creep);
+    container = Structures.getClosestFullContainer(creep);
     resourceEnergy = Structures.getClosestDroppedResource(creep, RESOURCE_ENERGY);
 
 }
