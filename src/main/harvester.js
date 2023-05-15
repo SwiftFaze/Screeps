@@ -23,7 +23,7 @@ function run(selectedCreep) {
                 if (Structures.isNot2Far(creep, resourceEnergy) && Creeps.pickUpResource(creep, resourceEnergy)) {
                     return;
                 }
-                if (Structures.isNot2Far(creep, container) && Creeps.withdrawFromStructure(creep, container)) {
+                if (Structures.isNot2Far(creep, container) &&   Creeps.withdrawFromStructure(creep, container, RESOURCE_ENERGY)) {
                 }
             } else {
                 Creeps.harvestStructure(creep, source)
