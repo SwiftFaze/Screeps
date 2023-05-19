@@ -106,10 +106,10 @@ const creepBuilds = {
         }, transporter: {
             priority: 2,
             quantity: 2,
-            body: [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY,CARRY, CARRY, CARRY, CARRY,  WORK, MOVE, MOVE, MOVE, MOVE]
+            body: [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, WORK, MOVE, MOVE, MOVE, MOVE]
         }, upgrader: {
             priority: 3,
-            quantity: 5,
+            quantity: 4,
             body: [WORK, WORK, WORK, WORK, WORK, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE]
         }, builder: {
             priority: 4,
