@@ -24,7 +24,7 @@ function getAssignedSource(creep) {
 function getClosestDroppedResource(creep) {
     const droppedResourceEnergies = creep.room.find(FIND_DROPPED_RESOURCES, {
         filter: (resource) => {
-            return resource.resourceType === RESOURCE_ENERGY && resource.amount > 150;
+            return resource.resourceType === RESOURCE_ENERGY && resource.amount >= 150;
         }
     });
     return creep.pos.findClosestByRange(droppedResourceEnergies);
@@ -52,7 +52,7 @@ function getClosestExtension(creep) {
 function getClosestFullContainer(creep) {
     const structures = creep.room.find(FIND_STRUCTURES, {
         filter: (structure) => {
-            return (structure.structureType === STRUCTURE_CONTAINER && structure.store.getUsedCapacity() > 150)
+            return (structure.structureType === STRUCTURE_CONTAINER && structure.store.getUsedCapacity() >= 150)
         }
     });
     return creep.pos.findClosestByRange(structures);

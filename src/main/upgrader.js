@@ -19,11 +19,10 @@ function run(selectedCreep) {
             }
         }
 
-        if (Creeps.withdrawFromStructure(creep, container, RESOURCE_ENERGY)) {
+        if (Creeps.pickUpResource(creep, resourceEnergy)) {
             return;
         }
-
-        Creeps.pickUpResource(creep, resourceEnergy);
+        Creeps.withdrawFromStructure(creep, container, RESOURCE_ENERGY)
     } else {
         Creeps.upgradeRoomController(creep)
     }
