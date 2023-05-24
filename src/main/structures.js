@@ -60,7 +60,7 @@ function getClosestFullContainer(creep) {
 function getClosestContainer(creep) {
     const structures = creep.room.find(FIND_STRUCTURES, {
         filter: (structure) => {
-            return (structure.structureType === STRUCTURE_CONTAINER)
+            return (structure.structureType === STRUCTURE_CONTAINER && structure.store.getFreeCapacity() !== 0)
         }
     });
     return creep.pos.findClosestByRange(structures);
