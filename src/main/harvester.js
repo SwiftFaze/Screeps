@@ -69,16 +69,19 @@ function runDefaultTransfermode() {
     if (Creeps.transfer2Structure(creep, link)) {
         return;
     }
-    if (Creeps.transfer2Structure(creep, extension)) {
-        return;
+    if (Structures.getRoomLinkCount(creep.room) < 2) {
+        if (Creeps.transfer2Structure(creep, extension)) {
+            return;
+        }
+        if (Creeps.transfer2Structure(creep, spawn)) {
+            return;
+        }
+        if (Creeps.transfer2Structure(creep, tower)) {
+            return;
+        }
+        Creeps.transfer2Structure(creep, storage)
     }
-    if (Creeps.transfer2Structure(creep, spawn)) {
-        return;
-    }
-    if (Creeps.transfer2Structure(creep, tower)) {
-        return;
-    }
-    Creeps.transfer2Structure(creep, storage)
+
 
 }
 
