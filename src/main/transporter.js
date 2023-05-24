@@ -28,7 +28,12 @@ function run(selectedCreep) {
         creep.memory.hasWithdrawnFromStorage = false;
 
         if (Structures.getRoomLinkCount(creep.room) > 2) {
-
+            if (storageLink.store.getUsedCapacity(RESOURCE_ENERGY) !== 0) {
+                if (Creeps.withdrawFromStructure(creep, storageLink, RESOURCE_ENERGY)) {
+                    return;
+                }
+            }
+            Creeps.pickUpResource(creep, resourceEnergy);
         }
 
 
