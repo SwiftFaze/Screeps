@@ -29,7 +29,7 @@ function spawnCreep() {
                 }
 
                 if (creep.components.role === Creeps.CREEP_ROLES.UPGRADER) {
-                    if (spawn.room.controller.level === 8 && spawn.room.controller.ticksToDowngrade < 50000) {
+                    if (spawn.room.controller.level === 8 && spawn.room.controller.ticksToDowngrade > 50000) {
                         return
                     }
                 }
