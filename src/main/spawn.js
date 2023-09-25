@@ -18,20 +18,10 @@ function spawnCreep() {
             sorId = source ? source.id : null;
 
             if (canSpawnCreep(spawn, creep)) {
-                if (creep.components.role === Creeps.CREEP_ROLES.HARVESTER) {
+
+
+                if (role === CREEP_ROLES.HARVESTER) {
                     Memory.sources[sorId] = Memory.sources[sorId] + 1;
-                }
-
-                if (creep.components.role === Creeps.CREEP_ROLES.BUILDER) {
-                    if (spawn.room.find(FIND_MY_CONSTRUCTION_SITES).length === 0) {
-                        return
-                    }
-                }
-
-                if (creep.components.role === Creeps.CREEP_ROLES.UPGRADER) {
-                    if (spawn.room.controller.level === 8 && spawn.room.controller.ticksToDowngrade > 50000) {
-                        return
-                    }
                 }
 
 

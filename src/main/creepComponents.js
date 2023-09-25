@@ -168,7 +168,7 @@ const creepBuilds = {
         }, builder: {
             priority: 4,
             quantity: 2,
-            body: [WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY,  CARRY, CARRY,  CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE]
+            body: [WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, CARRY,  CARRY, CARRY,  CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE]
         }
     }
 
