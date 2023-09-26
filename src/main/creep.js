@@ -45,14 +45,11 @@ function createCreep(spawn) {
                     return new MyCreep(getCreepName(CREEP_ROLES.HARVESTER), CreepComponents.getCreepComponents(1, CREEP_ROLES.HARVESTER));
                 } else {
 
-
                     if (!validSpawnConditions(role, spawn)) {
                         break
                     }
 
-
                     if (role === CREEP_ROLES.HARVESTER) {
-
                         if (canSpawnHarvester(room)) {
                             if (CreepComponents.creepBuilds[roomLevel][buildableCreepRole].quantity > creepList.filter(creep => creep.memory.role === role).length) {
                                 creepComponents = CreepComponents.getCreepComponents(roomLevel, role);
@@ -84,13 +81,12 @@ function createCreep(spawn) {
 function validSpawnConditions(role, spawn) {
     switch (role) {
         case CREEP_ROLES.BUILDER:
-            return spawn.room.find(FIND_MY_CONSTRUCTION_SITES).length !== 0;
+            return spawn.room.find(FIND_MY_CONSTRUCTION_SITES).length === 0;
         case CREEP_ROLES.UPGRADER:
-            return spawn.room.controller.level === 8 && spawn.room.controller.ticksToDowngrade > 50000
+            return spawn.room.controller.level !== 8 && spawn.room.controller.ticksToDowngrade < 50000
         default:
-            return false;
+            return true;
     }
-
 }
 
 
