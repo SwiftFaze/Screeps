@@ -27,7 +27,7 @@ function spawnCreep() {
     }
 }
 
-function setSourceId(creep, spawnName) {
+function setSourceId(creep, spawn) {
     var source = getBestSource(spawn);
     var sorId = null;
     sorId = source ? source.id : null;
