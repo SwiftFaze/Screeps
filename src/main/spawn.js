@@ -13,20 +13,11 @@ function spawnCreep() {
         const creep = Creeps.createCreep(spawn);
 
         if (creep) {
-            var source = getBestSource(spawnName);
-            var sorId = null;
-            sorId = source ? source.id : null;
-
 
             if (canSpawnCreep(spawn, creep)) {
-                if (creep.components.role === Creeps.CREEP_ROLES.HARVESTER) {
-                    Memory.sources[sorId] = Memory.sources[sorId] + 1;
-                }
-
-
                 spawn.spawnCreep(creep.components.bodyParts, creep.name, {
                     memory: {
-                        role: creep.components.role, sourceId: sorId
+                        role: creep.components.role, sourceId: setSourceId(creep)
                     }
                 });
             }
@@ -35,6 +26,17 @@ function spawnCreep() {
 
     }
 }
+
+function setSourceId(creep) {
+    var source = getBestSource(spawnName);
+    var sorId = null;
+    sorId = source ? source.id : null;
+    if (creep.components.role === Creeps.CREEP_ROLES.HARVESTER) {
+        Memory.sources[sorId] = Memory.sources[sorId] + 1;
+    }
+    return sorId;
+}
+
 
 function getBestSource(spawnName) {
 
