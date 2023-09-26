@@ -82,18 +82,16 @@ function createCreep(spawn) {
 }
 
 function validSpawnConditions(role, spawn) {
-    if (role === CREEP_ROLES.BUILDER) {
-        return spawn.room.find(FIND_MY_CONSTRUCTION_SITES).length !== 0;
+    switch (role) {
+        case CREEP_ROLES.BUILDER:
+            return spawn.room.find(FIND_MY_CONSTRUCTION_SITES).length !== 0;
+        case CREEP_ROLES.UPGRADER:
+            return spawn.room.controller.level === 8 && spawn.room.controller.ticksToDowngrade > 50000
+        default:
+            return false;
     }
-    if (role === CREEP_ROLES.UPGRADER) {
-        return spawn.room.controller.level === 8 && spawn.room.controller.ticksToDowngrade > 50000
-    }
-
-
 
 }
-
-
 
 
 function getCreepName(role) {
