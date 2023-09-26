@@ -84,8 +84,6 @@ global.canSpawnHarvester = function (room) {
         }
     }
     return canSpawn;
-
-
 }
 
 
@@ -97,17 +95,13 @@ function canSpawnCreep(spawn, creep) {
         }
     }
     return false;
-
-
 }
 
 
 function runCreep() {
-
     for (const creepName in Game.creeps) {
         const creepMemory = Memory.creeps[creepName]
         const creep = Game.creeps[creepName]
-
         switch (creepMemory.role) {
             case Creeps.CREEP_ROLES.HARVESTER:
                 Harvesters.run(creep)
