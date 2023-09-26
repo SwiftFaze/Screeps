@@ -13,7 +13,6 @@ function spawnCreep() {
         const creep = Creeps.createCreep(spawn);
 
         if (creep) {
-
             if (canSpawnCreep(spawn, creep)) {
                 spawn.spawnCreep(creep.components.bodyParts, creep.name, {
                     memory: {
@@ -21,9 +20,7 @@ function spawnCreep() {
                     }
                 });
             }
-
         }
-
     }
 }
 
@@ -66,8 +63,7 @@ function getFreeSpaces(selectedSource) {
         return 1;
     } else {
         return source.room.lookForAtArea(LOOK_TERRAIN, source.pos.y - 1, source.pos.x - 1, source.pos.y + 1, source.pos.x + 1, true)
-            .filter(tile => tile.terrain === "plain" || tile.terrain === "swamp")
-            .length;
+            .filter(tile => tile.terrain === "plain" || tile.terrain === "swamp").length;
     }
 
 }
