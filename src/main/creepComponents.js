@@ -159,7 +159,7 @@ const creepBuilds = {
             body: [WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, CARRY, MOVE]
         }, transporter: {
             priority: 2,
-            quantity: 1,
+            quantity: 2,
             body: [CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE, MOVE]
         }, upgrader: {
             priority: 3,
