@@ -19,9 +19,7 @@ function spawnCreep() {
 
 
             if (canSpawnCreep(spawn, creep)) {
-                if (creep.components.role === Creeps.CREEP_ROLES.HARVESTER) {
-                    Memory.sources[sorId] = Memory.sources[sorId] + 1;
-                }
+
 
 
                 spawn.spawnCreep(creep.components.bodyParts, creep.name, {
