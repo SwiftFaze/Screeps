@@ -50,11 +50,6 @@ function createCreep(spawn) {
                     }
 
                     if (role === CREEP_ROLES.HARVESTER) {
-                        Memory.sources[sorId] = Memory.sources[sorId] + 1;
-                    }
-
-
-                    if (role === CREEP_ROLES.HARVESTER) {
                         if (canSpawnHarvester(room)) {
                             if (CreepComponents.creepBuilds[roomLevel][buildableCreepRole].quantity > creepList.filter(creep => creep.memory.role === role).length) {
                                 creepComponents = CreepComponents.getCreepComponents(roomLevel, role);
