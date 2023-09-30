@@ -30,7 +30,21 @@ let resourceEnergy;
 let labSite;
 let extractorSite;
 let terminalSite;
-
+let spawn;
+let spawn2Repair;
+let spawnSite;
+let powerSpawn;
+let powerSpawn2Repair;
+let powerSpawnSite;
+let factory;
+let factory2Repair;
+let factorySite;
+let nuker;
+let nuker2Repair;
+let nukerSite;
+let observer;
+let observer2Repair;
+let observerSite;
 
 
 function run(selectedCreep) {
@@ -76,12 +90,12 @@ function setClosestStructures() {
     towerSite = Structures.getClosestSite(creep, STRUCTURE_TOWER);
 
 
-    // lab = Structures.getClosestEnergyStructure(creep, STRUCTURE_TOWER);
-    // lab2Repair = Structures.getClosestRepairableEnergyStructure(creep, STRUCTURE_TOWER);
+    lab = Structures.getMyClosestBasicStructure(creep, STRUCTURE_LAB);
+    lab2Repair = Structures.getClosestRepairableBasicStructure(creep, STRUCTURE_LAB);
     labSite = Structures.getClosestSite(creep, STRUCTURE_LAB);
-    //
-    // extractor = Structures.getClosestEnergyStructure(creep, STRUCTURE_TOWER);
-    // extractor2Repair = Structures.getClosestRepairableEnergyStructure(creep, STRUCTURE_TOWER);
+
+    extractor = Structures.getMyClosestBasicStructure(creep, STRUCTURE_EXTRACTOR);
+    extractor2Repair = Structures.getClosestRepairableBasicStructure(creep, STRUCTURE_EXTRACTOR);
     extractorSite = Structures.getClosestSite(creep, STRUCTURE_EXTRACTOR);
 
     terminalSite = Structures.getClosestSite(creep, STRUCTURE_TERMINAL);
@@ -114,6 +128,25 @@ function setClosestStructures() {
     resourceEnergy = Structures.getClosestDroppedResource(creep, RESOURCE_ENERGY);
 
 
+    spawn = Structures.getMyClosestBasicStructure(creep, STRUCTURE_SPAWN);
+    spawn2Repair = Structures.getClosestRepairableBasicStructure(creep, STRUCTURE_SPAWN);
+    spawnSite = Structures.getClosestSite(creep, STRUCTURE_SPAWN);
+
+    powerSpawn = Structures.getMyClosestBasicStructure(creep, STRUCTURE_POWER_SPAWN);
+    powerSpawn2Repair = Structures.getClosestRepairableBasicStructure(creep, STRUCTURE_POWER_SPAWN);
+    powerSpawnSite = Structures.getClosestSite(creep, STRUCTURE_POWER_SPAWN);
+
+    factory = Structures.getMyClosestBasicStructure(creep, STRUCTURE_FACTORY);
+    factory2Repair = Structures.getClosestRepairableBasicStructure(creep, STRUCTURE_FACTORY);
+    factorySite = Structures.getClosestSite(creep, STRUCTURE_FACTORY);
+
+    nuker = Structures.getMyClosestBasicStructure(creep, STRUCTURE_NUKER);
+    nuker2Repair = Structures.getClosestRepairableBasicStructure(creep, STRUCTURE_NUKER);
+    nukerSite = Structures.getClosestSite(creep, STRUCTURE_NUKER);
+
+    observer = Structures.getMyClosestBasicStructure(creep, STRUCTURE_OBSERVER);
+    observer2Repair = Structures.getClosestRepairableBasicStructure(creep, STRUCTURE_OBSERVER);
+    observerSite = Structures.getClosestSite(creep, STRUCTURE_OBSERVER);
 
 }
 
@@ -146,12 +179,30 @@ function buildStructures() {
     if (Creeps.buildStructure(creep, roadSite)) {
         return true;
     }
+    if (Creeps.repairStructure(creep, spawnSite)) {
+        return true;
+    }
+    if (Creeps.repairStructure(creep, observerSite)) {
+        return true;
+    }
+    if (Creeps.repairStructure(creep, nukerSite)) {
+        return true;
+    }
+    if (Creeps.repairStructure(creep, factorySite)) {
+        return true;
+    }
+    if (Creeps.repairStructure(creep, powerSpawnSite)) {
+        return true;
+    }
     return Creeps.buildStructure(creep, rampartSite);
 
 
 }
 
 function repairStructures() {
+    if (Creeps.repairStructure(creep, spawn2Repair)) {
+        return true;
+    }
     if (Creeps.repairStructure(creep, container2Repair)) {
         return true;
     }
@@ -168,6 +219,18 @@ function repairStructures() {
         return true;
     }
     if (Creeps.repairStructure(creep, road2Repair)) {
+        return true;
+    }
+    if (Creeps.repairStructure(creep, observer2Repair)) {
+        return true;
+    }
+    if (Creeps.repairStructure(creep, nuker2Repair)) {
+        return true;
+    }
+    if (Creeps.repairStructure(creep, factory2Repair)) {
+        return true;
+    }
+    if (Creeps.repairStructure(creep, powerSpawn2Repair)) {
         return true;
     }
     return Creeps.repairStructure(creep, rampart2Repair);

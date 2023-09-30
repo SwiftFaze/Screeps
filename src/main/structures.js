@@ -39,6 +39,16 @@ function getClosestSpawn(creep) {
     });
     return creep.pos.findClosestByRange(spawns);
 }
+function getClosestPowerSpawn(creep) {
+
+    const spawns = creep.room.find(FIND_MY_STRUCTURES, {
+        filter: (structure) => {
+            return (structure.structureType === STRUCTURE_POWER_SPAWN && structure.store.getFreeCapacity())
+        }
+    });
+    return creep.pos.findClosestByRange(spawns);
+}
+
 
 function getClosestExtension(creep) {
     const extensions = creep.room.find(FIND_MY_STRUCTURES, {
