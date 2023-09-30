@@ -179,6 +179,54 @@ function buildStructures() {
     if (Creeps.buildStructure(creep, roadSite)) {
         return true;
     }
+    if (Creeps.buildStructure(creep, spawnSite)) {
+        return true;
+    }
+    if (Creeps.buildStructure(creep, observerSite)) {
+        return true;
+    }
+    if (Creeps.buildStructure(creep, nukerSite)) {
+        return true;
+    }
+    if (Creeps.buildStructure(creep, factorySite)) {
+        return true;
+    }
+    if (Creeps.buildStructure(creep, powerSpawnSite)) {
+        return true;
+    }
+    return Creeps.buildStructure(creep, rampartSite);
+
+
+}
+
+function repairStructures() {
+    if (Creeps.repairStructure(creep, containerSite)) {
+        return true;
+    }
+    if (Creeps.repairStructure(creep, extensionSite)) {
+        return true;
+    }
+    if (Creeps.repairStructure(creep, towerSite)) {
+        return true;
+    }
+    if (Creeps.repairStructure(creep, storageSite)) {
+        return true;
+    }
+    if (Creeps.repairStructure(creep, linkSite)) {
+        return true;
+    }
+    if (Creeps.repairStructure(creep, terminalSite)) {
+        return true;
+    }
+    if (Creeps.repairStructure(creep, extractorSite)) {
+        return true;
+    }
+    if (Creeps.repairStructure(creep, labSite)) {
+        return true;
+    }
+    if (Creeps.repairStructure(creep, roadSite)) {
+        return true;
+    }
     if (Creeps.repairStructure(creep, spawnSite)) {
         return true;
     }
@@ -194,46 +242,7 @@ function buildStructures() {
     if (Creeps.repairStructure(creep, powerSpawnSite)) {
         return true;
     }
-    return Creeps.buildStructure(creep, rampartSite);
-
-
-}
-
-function repairStructures() {
-    if (Creeps.repairStructure(creep, spawn2Repair)) {
-        return true;
-    }
-    if (Creeps.repairStructure(creep, container2Repair)) {
-        return true;
-    }
-    if (Creeps.repairStructure(creep, extension2Repair)) {
-        return true;
-    }
-    if (Creeps.repairStructure(creep, tower2Repair)) {
-        return true;
-    }
-    if (Creeps.repairStructure(creep, storage2Repair)) {
-        return true;
-    }
-    if (Creeps.repairStructure(creep, link2Repair)) {
-        return true;
-    }
-    if (Creeps.repairStructure(creep, road2Repair)) {
-        return true;
-    }
-    if (Creeps.repairStructure(creep, observer2Repair)) {
-        return true;
-    }
-    if (Creeps.repairStructure(creep, nuker2Repair)) {
-        return true;
-    }
-    if (Creeps.repairStructure(creep, factory2Repair)) {
-        return true;
-    }
-    if (Creeps.repairStructure(creep, powerSpawn2Repair)) {
-        return true;
-    }
-    return Creeps.repairStructure(creep, rampart2Repair);
+    return Creeps.repairStructure(creep, rampartSite);
 
 }
 
