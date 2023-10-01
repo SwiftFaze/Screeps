@@ -12,14 +12,12 @@ function spawnCreep() {
         const spawn = Game.spawns[spawnName]
         const creep = Creeps.createCreep(spawn);
 
-        if (creep) {
-            if (canSpawnCreep(spawn, creep)) {
-                spawn.spawnCreep(creep.components.bodyParts, creep.name, {
-                    memory: {
-                        role: creep.components.role, sourceId: setSourceId(creep, spawn)
-                    }
-                });
-            }
+        if (canSpawnCreep(spawn, creep)) {
+            spawn.spawnCreep(creep.components.bodyParts, creep.name, {
+                memory: {
+                    role: creep.components.role, sourceId: setSourceId(creep, spawn)
+                }
+            });
         }
     }
 }
@@ -86,7 +84,7 @@ global.canSpawnHarvester = function (room) {
 
 
 function canSpawnCreep(spawn, creep) {
-    if (creep) {
+    if (creep && spawn.my) {
         const spawnSpawnValue = spawn.spawnCreep(creep.components.bodyParts, creep.name, {dryRun: true});
         if (spawnSpawnValue === 0) {
             return true;

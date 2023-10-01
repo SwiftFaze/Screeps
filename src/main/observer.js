@@ -1,23 +1,31 @@
 function run() {
 
+    for (var roomName in Game.rooms) {
 
+        var myRoom = Game.rooms[roomName];
 
+        if (myRoom.controller && myRoom.controller.level === 8 && myRoom.controller.my) {
+            var exits = Game.map.describeExits(roomName);
 
+            var observer = myRoom.find(FIND_MY_STRUCTURES, {
+                filter: (structure) => {
+                    return structure.structureType === STRUCTURE_OBSERVER;
+                }
+            });
 
-    for (var room in Game.rooms) {
-        var allRooms = Game.rooms[room];
+            for (var direction in exits) {
+                if (exits.hasOwnProperty(direction)) {
+                    var adjacentRoomName = exits[direction];
 
-        var observer = allRooms.find(FIND_MY_STRUCTURES, {
-            filter: (structure) => {
-                return (structure.structureType === STRUCTURE_OBSERVER)
+                    if (observer.length !== 0) {
+                        var nextRoom = observer[0].observeRoom(adjacentRoomName);
+                    }
+                }
             }
-        });
-
-        console.log(observer)
-
-
+        }
     }
 
 }
+
 
 module.exports = {run};

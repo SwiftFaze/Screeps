@@ -21,6 +21,8 @@ class MyCreep {
 }
 
 function createCreep(spawn) {
+
+
     const room = spawn.room
     const roomLevel = room.controller.level
     const creepList = []
@@ -29,7 +31,6 @@ function createCreep(spawn) {
             creepList.push(Game.creeps[creep])
         }
     }
-
 
     let creepComponents;
     let creepName;
@@ -51,13 +52,19 @@ function createCreep(spawn) {
 
                     if (role === CREEP_ROLES.HARVESTER) {
                         if (canSpawnHarvester(room)) {
+
+
                             if (CreepComponents.creepBuilds[roomLevel][buildableCreepRole].quantity > creepList.filter(creep => creep.memory.role === role).length) {
+
+
                                 creepComponents = CreepComponents.getCreepComponents(roomLevel, role);
                                 creepName = getCreepName(creepComponents.role);
                                 return new MyCreep(creepName, creepComponents);
                             }
                         }
                     } else {
+
+
                         const currentCreepAmount = creepList.filter(creep => creep.memory.role === role).length
                         if (currentCreepAmount === 0 && role === CREEP_ROLES.TRANSPORTER) {
                             return new MyCreep(getCreepName(CREEP_ROLES.TRANSPORTER), CreepComponents.getCreepComponents(1, CREEP_ROLES.TRANSPORTER));

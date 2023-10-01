@@ -55,13 +55,21 @@ function initSources() {
     for (var roomName in Game.rooms) {
         var room = Game.rooms[roomName];
 
-        // Find all sources in the room
-        var sources = room.find(FIND_SOURCES);
 
-        // Initialize the sources in the Memory object
-        for (var i in sources) {
-            var source = sources[i];
-            Memory.sources[source.id] = 0;
+
+        if(room.controller){
+            if (room.controller.my) {
+                // Find all sources in the room
+                var sources = room.find(FIND_SOURCES);
+
+                // Initialize the sources in the Memory object
+                for (var i in sources) {
+
+                    var source = sources[i];
+
+                    Memory.sources[source.id] = 0;
+                }
+            }
         }
     }
 
@@ -89,11 +97,15 @@ function clearSourceMemory() {
     for (var sourceName in Memory.sources) {
         for (var roomName in Game.rooms) {
             var room = Game.rooms[roomName];
-            const foundSource = room.find(FIND_SOURCES, {
-                filter: {id: sourceName}
-            });
-            if (!foundSource.length) {
-                delete Memory.sources[sourceName];
+            if(room.controller) {
+                if (room.controller.my) {
+                    const foundSource = room.find(FIND_SOURCES, {
+                        filter: {id: sourceName}
+                    });
+                    if (!foundSource.length) {
+                        delete Memory.sources[sourceName];
+                    }
+                }
             }
         }
     }
