@@ -91,12 +91,24 @@ function validSpawnConditions(role, spawn) {
             return spawn.room.find(FIND_MY_CONSTRUCTION_SITES).length !== 0;
         case CREEP_ROLES.UPGRADER:
             return spawn.room.controller.level !== 8 && spawn.room.controller.ticksToDowngrade < 50000
+        case CREEP_ROLES.CLAIMER:
+            return !rooms2Claim()
         default:
             return true;
     }
 }
 
+function rooms2Claim() {
 
+    for (const i in Memory.rooms) {
+        var roomController = Game.rooms[Memory.rooms[i]].controller;
+        if (roomController) {
+            console.log(roomController)
+        }
+    }
+
+    return role.charAt(0).toUpperCase() + "_" + generateRandomString(5);
+}
 function getCreepName(role) {
     return role.charAt(0).toUpperCase() + "_" + generateRandomString(5);
 }
@@ -206,6 +218,10 @@ function setMemoryHarvestingState(creep) {
         creep.memory.harvesting = false;
     }
 }
+
+
+
+
 
 function setMemoryBuildingState(creep) {
     if (creep.memory.building === undefined) {
