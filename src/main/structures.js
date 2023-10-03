@@ -102,7 +102,20 @@ function getMyClosestBasicStructure(creep, type) {
             return (structure.structureType === type)
         }
     });
-    return creep.pos.findClosestByRange(structures);
+
+    if (structures.length === 0) {
+        var buildFlag = getFlag('BUILD')
+        if (buildFlag !== null) {
+            const structures = Game.rooms[buildFlag.pos.roomName].find(FIND_MY_STRUCTURES, {
+                filter: (structure) => {
+                    return (structure.structureType === type)
+                }
+            });
+            return creep.pos.findClosestByRange(structures);
+        }
+    } else {
+        return creep.pos.findClosestByRange(structures);
+    }
 }
 
 function getMyClosestRepairableBasicStructure(creep, type) {
@@ -229,19 +242,18 @@ function getRoomLinkCount(room) {
 }
 
 
-function getClaimFlag() {
+function getFlag(wantedFlagName) {
     for (var flagName in Game.flags) {
-        if (flagName.toUpperCase() === 'CLAIM') {
+        if (flagName.toUpperCase() === wantedFlagName) {
             return Game.flags[flagName]
         }
     }
 }
 
-
 module.exports = {
     getClosestBasicStructure,
     sourceIsDepleted,
-    getClaimFlag,
+    getFlag,
     getRoomLinkCount,
     getClosestContainer,
     isNot2Far,

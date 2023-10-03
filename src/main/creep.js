@@ -199,7 +199,7 @@ function setMemoryHome(creep) {
 }
 function setMemoryRoom2Claim(creep) {
     if (creep.memory.room2Claim === undefined) {
-        creep.memory.room2Claim = Structures.getClaimFlag().pos.roomName;
+        creep.memory.room2Claim = Structures.getFlag('CLAIM').pos.roomName;
     }
 }
 

@@ -18,7 +18,7 @@ function run() {
             for (var direction in exits) {
                 if (exits.hasOwnProperty(direction)) {
                     if (observer.length !== 0) {
-                        var nextRoom = observer[0].observeRoom(Structures.getClaimFlag());
+                        var nextRoom = observer[0].observeRoom(Structures.getFlag('CLAIM'));
                     }
                 }
             }
