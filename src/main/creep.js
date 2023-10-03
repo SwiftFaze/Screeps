@@ -93,7 +93,6 @@ function validSpawnConditions(role, spawn) {
 
 function rooms2Claim() {
     for (const roomName in Game.rooms) {
-        console.log(roomName)
         if (!Game.rooms[roomName].controller.my) {
             return true
         }
@@ -200,12 +199,7 @@ function setMemoryHome(creep) {
 }
 function setMemoryRoom2Claim(creep) {
     if (creep.memory.room2Claim === undefined) {
-        creep.memory.room2Claim = Structures.getClaimFlag().pos.room;
-    }
-}
-function setMemoryController2Claim(creep) {
-    if (creep.memory.controller2Claim === undefined) {
-        creep.memory.controller2Claim = Game.rooms[Structures.getClaimFlag().pos.room].controller;
+        creep.memory.room2Claim = Structures.getClaimFlag().pos.roomName;
     }
 }
 
@@ -284,17 +278,31 @@ function withdrawAll(creep, structure) {
 }
 
 
+function moveToRoom(creep, targetRoomName) {
+    if (creep.room.name !== targetRoomName) {
+        var route = Game.map.findRoute(creep.room.name, targetRoomName);
+        if (route.length > 0) {
+            var exit = creep.pos.findClosestByRange(route[0].exit);
+            creep.moveTo(exit);
+            return true
+        }
+    } else {
+        return false;
+    }
+}
+
+
 module.exports = {
     resetTransporterLinks,
     hasLink,
     withdrawAll,
+    moveToRoom,
     canBuild,
     canHarvest,
     repairStructure,
     setMemoryBuildingState,
     setMemoryHarvestingState,
     setMemoryHome,
-    setMemoryController2Claim,
     setMemoryRoom2Claim,
     buildStructure,
     transfer2Structure,

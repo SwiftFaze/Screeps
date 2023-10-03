@@ -14,8 +14,10 @@ let link;
 
 function run(selectedCreep) {
     creep = selectedCreep;
-
     setMemory();
+    if (!Creeps.moveToRoom(creep.memory.room2Claim)) {
+        creep.claimController(creep.room.controller);
+    }
 
 
 }
@@ -23,10 +25,8 @@ function run(selectedCreep) {
 
 function setMemory() {
     Creeps.setMemoryHome(creep)
-    Creeps.setMemoryRoom2Claim()
-    Creeps.setMemoryController2Claim()
+    Creeps.setMemoryRoom2Claim(creep)
 }
-
 
 
 
