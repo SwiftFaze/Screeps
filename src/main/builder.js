@@ -87,8 +87,9 @@ function setMemory() {
 }
 
 function setClosestStructures() {
-    source = creep.pos.findClosestByPath(FIND_SOURCES)
-
+    source = creep.pos.findClosestByPath(FIND_SOURCES, {
+        filter: (source) => source.energy > 0
+    });
     extension = Structures.getClosestEnergyStructure(creep, STRUCTURE_EXTENSION);
     extension2Repair = Structures.getClosestRepairableEnergyStructure(creep, STRUCTURE_EXTENSION);
     extensionSite = Structures.getClosestSite(creep, STRUCTURE_EXTENSION);
