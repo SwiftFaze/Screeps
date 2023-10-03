@@ -72,7 +72,12 @@ function run(selectedCreep) {
         if (Creeps.withdrawFromStructure(creep, container, RESOURCE_ENERGY)) {
             return;
         }
-        Creeps.pickUpResource(creep, resourceEnergy)
+        if (Creeps.pickUpResource(creep, resourceEnergy)) {
+            return;
+        }
+        Creeps.harvestStructure(creep, source)
+
+
     }
 }
 
@@ -82,7 +87,7 @@ function setMemory() {
 }
 
 function setClosestStructures() {
-    source = Structures.getAssignedSource(creep);
+    source = creep.pos.findClosestByPath(FIND_SOURCES)
 
     extension = Structures.getClosestEnergyStructure(creep, STRUCTURE_EXTENSION);
     extension2Repair = Structures.getClosestRepairableEnergyStructure(creep, STRUCTURE_EXTENSION);
