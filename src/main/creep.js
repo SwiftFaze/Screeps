@@ -1,5 +1,6 @@
 const CreepComponents = require("./creepComponents")
 const Structures = require("./structures")
+const {getFlag} = require("./structures");
 
 const CREEP_ROLES = {
     HARVESTER: 'harvester',
@@ -81,7 +82,7 @@ function createCreep(spawn) {
 function validSpawnConditions(role, spawn) {
     switch (role) {
         case CREEP_ROLES.BUILDER:
-            return spawn.room.find(FIND_MY_CONSTRUCTION_SITES).length !== 0;
+            return sites2build()
         case CREEP_ROLES.UPGRADER:
             return spawn.room.controller.level !== 8 && spawn.room.controller.ticksToDowngrade < 50000
         case CREEP_ROLES.CLAIMER:
@@ -98,7 +99,13 @@ function rooms2Claim() {
         }
     }
     return false;
+
+}function sites2build() {
+    return spawn.room.find(FIND_MY_CONSTRUCTION_SITES).length !== 0 && getFlag('BUILD') !== null;
 }
+
+
+
 
 function getCreepName(role) {
     return role.charAt(0).toUpperCase() + "_" + generateRandomString(5);
