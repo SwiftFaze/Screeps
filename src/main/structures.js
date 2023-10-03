@@ -155,7 +155,7 @@ function getClosestSite(creep, type) {
 
     if (sites.length === 0 && type === STRUCTURE_SPAWN) {
         var buildFlag = getFlag('BUILD')
-        if (buildFlag !== null) {
+        if (buildFlag !== undefined) {
             const sites = Game.rooms[buildFlag.pos.roomName].find(FIND_MY_CONSTRUCTION_SITES, {
                 filter: (structure) => {
                     return (structure.structureType === type)
