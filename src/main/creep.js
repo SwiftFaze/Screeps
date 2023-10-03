@@ -101,7 +101,7 @@ function rooms2Claim() {
     return false;
 
 }function sites2build(spawn) {
-    return spawn.room.find(FIND_MY_CONSTRUCTION_SITES).length !== 0 && getFlag('BUILD') !== null;
+    return spawn.room.find(FIND_MY_CONSTRUCTION_SITES).length !== 0 || getFlag('BUILD') !== null;
 }
 
 
