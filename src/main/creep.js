@@ -82,7 +82,7 @@ function createCreep(spawn) {
 function validSpawnConditions(role, spawn) {
     switch (role) {
         case CREEP_ROLES.BUILDER:
-            return sites2build()
+            return sites2build(spawn)
         case CREEP_ROLES.UPGRADER:
             return spawn.room.controller.level !== 8 && spawn.room.controller.ticksToDowngrade < 50000
         case CREEP_ROLES.CLAIMER:
@@ -100,7 +100,7 @@ function rooms2Claim() {
     }
     return false;
 
-}function sites2build() {
+}function sites2build(spawn) {
     return spawn.room.find(FIND_MY_CONSTRUCTION_SITES).length !== 0 && getFlag('BUILD') !== null;
 }
 
