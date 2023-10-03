@@ -16,7 +16,9 @@ function run(selectedCreep) {
     creep = selectedCreep;
     setMemory();
     if (!Creeps.moveToRoom(creep, creep.memory.room2Claim)) {
-        creep.claimController(creep.room.controller);
+        if (creep.claimController(creep.room.controller) !== 0) {
+            creep.moveTo(creep.room.controller)
+        }
     }
 
 
@@ -27,8 +29,6 @@ function setMemory() {
     Creeps.setMemoryHome(creep)
     Creeps.setMemoryRoom2Claim(creep)
 }
-
-
 
 
 module.exports = {run};
