@@ -155,10 +155,10 @@ function setClosestStructures() {
 
 
 function buildStructures() {
-    if (Creeps.buildStructure(creep, containerSite)) {
+    if (Creeps.buildStructure(creep, spawnSite)) {
         return true;
     }
-    if (Creeps.buildStructure(creep, spawnSite)) {
+    if (Creeps.buildStructure(creep, containerSite)) {
         return true;
     }
     if (Creeps.buildStructure(creep, extensionSite)) {

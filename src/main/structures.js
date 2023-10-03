@@ -153,7 +153,7 @@ function getClosestSite(creep, type) {
         }
     });
 
-    if (sites.length === 0) {
+    if (sites.length === 0 && type === STRUCTURE_SPAWN) {
         var buildFlag = getFlag('BUILD')
         if (buildFlag !== null) {
             const sites = Game.rooms[buildFlag.pos.roomName].find(FIND_MY_CONSTRUCTION_SITES, {
@@ -161,7 +161,9 @@ function getClosestSite(creep, type) {
                     return (structure.structureType === type)
                 }
             });
-            return creep.pos.findClosestByRange(sites);
+            if (sites.length !== 0) {
+                return sites[0]
+            }
         }
     } else {
         return creep.pos.findClosestByRange(sites);
