@@ -158,6 +158,9 @@ function buildStructures() {
     if (Creeps.buildStructure(creep, containerSite)) {
         return true;
     }
+    if (Creeps.buildStructure(creep, spawnSite)) {
+        return true;
+    }
     if (Creeps.buildStructure(creep, extensionSite)) {
         return true;
     }
