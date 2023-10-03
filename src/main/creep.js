@@ -185,9 +185,15 @@ function buildStructure(creep, structure) {
     var able2Build = false;
     if (structure) {
         able2Build = true;
-        if (creep.build(structure) === ERR_NOT_IN_RANGE) {
-            creep.moveTo(structure);
+        if (structure.room === creep.room2Claim) {
+            if (creep.build(structure) === ERR_NOT_IN_RANGE) {
+                creep.moveTo(structure);
+            }
+        } else {
+            moveToRoom(creep, structure.room)
         }
+
+
     }
     return able2Build;
 }
