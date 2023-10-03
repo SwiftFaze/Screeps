@@ -32,7 +32,6 @@ function run() {
 
             // Attack closest Hostile
             var closestHostile = towers[tower].pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-            //console.log(closestHostile)
             if (closestHostile) {
                 towers[tower].attack(closestHostile);
             }
