@@ -192,7 +192,7 @@ function buildStructure(creep, structure) {
     var able2Build = false;
     if (structure) {
         able2Build = true;
-        if (structure.room === creep.room2Claim) {
+        if (structure.room === creep.room) {
             if (creep.build(structure) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(structure);
             }
