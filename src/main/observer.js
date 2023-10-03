@@ -1,5 +1,7 @@
-function run() {
+const Structures = require("./structures");
 
+
+function run() {
     for (var roomName in Game.rooms) {
 
         var myRoom = Game.rooms[roomName];
@@ -15,15 +17,14 @@ function run() {
 
             for (var direction in exits) {
                 if (exits.hasOwnProperty(direction)) {
-                    var adjacentRoomName = exits[direction];
-
                     if (observer.length !== 0) {
-                        var nextRoom = observer[0].observeRoom(adjacentRoomName);
+                        var nextRoom = observer[0].observeRoom(Structures.getClaimFlag());
                     }
                 }
             }
         }
     }
+
 
 }
 

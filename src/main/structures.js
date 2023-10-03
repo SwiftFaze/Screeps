@@ -228,9 +228,20 @@ function getRoomLinkCount(room) {
     }
 }
 
+
+function getClaimFlag() {
+    for (var flagName in Game.flags) {
+        if (flagName.toUpperCase() === 'CLAIM') {
+            return Game.flags[flagName]
+        }
+    }
+}
+
+
 module.exports = {
     getClosestBasicStructure,
     sourceIsDepleted,
+    getClaimFlag,
     getRoomLinkCount,
     getClosestContainer,
     isNot2Far,

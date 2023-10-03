@@ -22,7 +22,6 @@ class MyCreep {
 
 function createCreep(spawn) {
 
-
     const room = spawn.room
     const roomLevel = room.controller.level
     const creepList = []
@@ -31,7 +30,6 @@ function createCreep(spawn) {
             creepList.push(Game.creeps[creep])
         }
     }
-
     let creepComponents;
     let creepName;
 
@@ -52,18 +50,13 @@ function createCreep(spawn) {
 
                     if (role === CREEP_ROLES.HARVESTER) {
                         if (canSpawnHarvester(room)) {
-
-
                             if (CreepComponents.creepBuilds[roomLevel][buildableCreepRole].quantity > creepList.filter(creep => creep.memory.role === role).length) {
-
-
                                 creepComponents = CreepComponents.getCreepComponents(roomLevel, role);
                                 creepName = getCreepName(creepComponents.role);
                                 return new MyCreep(creepName, creepComponents);
                             }
                         }
                     } else {
-
 
                         const currentCreepAmount = creepList.filter(creep => creep.memory.role === role).length
                         if (currentCreepAmount === 0 && role === CREEP_ROLES.TRANSPORTER) {
@@ -99,23 +92,12 @@ function validSpawnConditions(role, spawn) {
 }
 
 function rooms2Claim() {
-
-    // for (const i in Memory.rooms) {
-    //     console.log("Memory rooms : " + Memory.rooms[i].name)
-    //
-    // }
-    //
-    //
-    // for (const x in Game.rooms) {
-    //     console.log("Game rooms : " + Game.rooms[x].name)
-    // }
-    //
-    // for (const i in Memory.rooms) {
-    //     var room = Game.rooms[Memory.rooms[i].name];
-    //     console.log("End rooms : " + room)
-    // }
-
-
+    for (const roomName in Game.rooms) {
+        console.log(roomName)
+        if (!Game.rooms[roomName].controller.my) {
+            return true
+        }
+    }
     return false;
 }
 
@@ -216,6 +198,17 @@ function setMemoryHome(creep) {
         creep.memory.home = creep.room.name;
     }
 }
+function setMemoryRoom2Claim(creep) {
+    if (creep.memory.room2Claim === undefined) {
+        creep.memory.room2Claim = Structures.getClaimFlag().pos.room;
+    }
+}
+function setMemoryController2Claim(creep) {
+    if (creep.memory.controller2Claim === undefined) {
+        creep.memory.controller2Claim = Game.rooms[Structures.getClaimFlag().pos.room].controller;
+    }
+}
+
 
 function setMemoryHarvestingState(creep) {
     if (creep.memory.harvesting === undefined) {
@@ -301,6 +294,8 @@ module.exports = {
     setMemoryBuildingState,
     setMemoryHarvestingState,
     setMemoryHome,
+    setMemoryController2Claim,
+    setMemoryRoom2Claim,
     buildStructure,
     transfer2Structure,
     upgradeRoomController,

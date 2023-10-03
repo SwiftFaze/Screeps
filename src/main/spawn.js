@@ -3,6 +3,7 @@ const Builders = require('./builder')
 const Upgraders = require('./upgrader')
 const Transporters = require('./transporter')
 const Creeps = require('./creep')
+const Claimers = require('./claimer')
 // const CreepComponents = require('./creepComponents')
 const Settings = require('./settings')
 
@@ -110,6 +111,9 @@ function runCreep() {
                 break;
             case Creeps.CREEP_ROLES.TRANSPORTER:
                 Transporters.run(creep)
+                break;
+            case Creeps.CREEP_ROLES.CLAIMER:
+                Claimers.run(creep)
                 break;
         }
 
