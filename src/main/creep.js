@@ -94,17 +94,17 @@ function validSpawnConditions(role, spawn) {
 
 function rooms2Claim() {
     for (const roomName in Game.rooms) {
-        if (!Game.rooms[roomName].controller.my) {
+        if (!Game.rooms[roomName].controller.my || getFlag('CLAIM') !== undefined) {
             return true
         }
     }
     return false;
 
-}function sites2build(spawn) {
-    return spawn.room.find(FIND_MY_CONSTRUCTION_SITES).length !== 0 || getFlag('BUILD') !== undefined;
 }
 
-
+function sites2build(spawn) {
+    return spawn.room.find(FIND_MY_CONSTRUCTION_SITES).length !== 0 || getFlag('BUILD') !== undefined;
+}
 
 
 function getCreepName(role) {
@@ -210,6 +210,7 @@ function setMemoryHome(creep) {
         creep.memory.home = creep.room.name;
     }
 }
+
 function setMemoryRoom2Claim(creep) {
     if (creep.memory.room2Claim === undefined) {
         creep.memory.room2Claim = Structures.getFlag('CLAIM').pos.roomName;
