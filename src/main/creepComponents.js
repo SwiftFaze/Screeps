@@ -5,22 +5,9 @@ class CreepComponents {
 
     }
 
-    // bodyParts
-    // role
-
 
 }
 
-// const CREEP_BODY_PARTS = {
-//     WORK: WORK,
-//     MOVE: 'MOVE,
-//     CARRY: 'CARRY,
-//     ATTACK: 'ATTACK,
-//     RANGED_ATTACK: RANGED_ATTACK,
-//     HEAL: HEAL,
-//     TOUGH: TOUGH,
-//     CLAIM: 'CLAIM'
-// }
 
 
 function getCreepBody(arrayBodyparts) {
