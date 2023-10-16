@@ -84,7 +84,11 @@ function validSpawnConditions(role, spawn) {
         case CREEP_ROLES.BUILDER:
             return sites2build(spawn)
         case CREEP_ROLES.UPGRADER:
-            return spawn.room.controller.ticksToDowngrade < 50000
+            if (spawn.room.controller.level === 8) {
+                return spawn.room.controller.ticksToDowngrade < 50000;
+            } else {
+                return true;
+            }
         case CREEP_ROLES.CLAIMER:
             return rooms2Claim()
         default:
