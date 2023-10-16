@@ -79,16 +79,20 @@ function createCreep(spawn) {
 
 }
 
+function canSpawnUpgrader(spawn) {
+    if (spawn.room.controller.level === 8) {
+        return spawn.room.controller.ticksToDowngrade < 50000;
+    } else {
+        return true;
+    }
+}
+
 function validSpawnConditions(role, spawn) {
     switch (role) {
         case CREEP_ROLES.BUILDER:
             return sites2build(spawn)
         case CREEP_ROLES.UPGRADER:
-            if (spawn.room.controller.level === 8) {
-                return spawn.room.controller.ticksToDowngrade < 50000;
-            } else {
-                return true;
-            }
+            return canSpawnUpgrader(spawn);
         case CREEP_ROLES.CLAIMER:
             return rooms2Claim()
         default:
