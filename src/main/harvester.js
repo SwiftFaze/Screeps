@@ -69,7 +69,7 @@ function runDefaultTransfermode() {
     if (Creeps.transfer2Structure(creep, link)) {
         return;
     }
-    if (Structures.getRoomLinkCount(creep.room) < 2) {
+    if (Structures.getRoomLinkCount(creep.room) <= 2) {
         if (Creeps.transfer2Structure(creep, extension)) {
             return;
         }
