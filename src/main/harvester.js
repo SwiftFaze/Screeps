@@ -20,6 +20,7 @@ function run(selectedCreep) {
     if (!controller.setControllerSign(creep)) {
         if (Creeps.canHarvest(creep)) {
             if (Structures.sourceIsDepleted(source)) {
+
                 if (Structures.isNot2Far(creep, resourceEnergy) && Creeps.pickUpResource(creep, resourceEnergy)) {
                     return;
                 }
@@ -30,9 +31,11 @@ function run(selectedCreep) {
             }
         } else {
             if (Creeps.hasLink(creep)) {
+
                 if (Structures.sourceIsDepleted(source)) {
                     runDefaultTransfermode()
                 } else {
+
                     if (Structures.isNot2Far(creep, link) && Creeps.transfer2Structure(creep, link)) {
                         return;
                     }
@@ -42,6 +45,7 @@ function run(selectedCreep) {
                     creep.drop(RESOURCE_ENERGY);
                 }
             } else {
+
                 runDefaultTransfermode()
             }
         }
@@ -66,21 +70,28 @@ function setClosestStructures() {
 }
 
 function runDefaultTransfermode() {
-    if (Creeps.transfer2Structure(creep, link)) {
+    if (Structures.getRoomLinkCount(creep.room) <= 2) {
+        defaultTransfermode()
+    } else {
+        if (Creeps.transfer2Structure(creep, link)) {
+            return;
+        }
+        defaultTransfermode()
+    }
+}
+
+function defaultTransfermode() {
+
+    if (Creeps.transfer2Structure(creep, extension)) {
         return;
     }
-    if (Structures.getRoomLinkCount(creep.room) <= 2) {
-        if (Creeps.transfer2Structure(creep, extension)) {
-            return;
-        }
-        if (Creeps.transfer2Structure(creep, spawn)) {
-            return;
-        }
-        if (Creeps.transfer2Structure(creep, tower)) {
-            return;
-        }
-        Creeps.transfer2Structure(creep, storage)
+    if (Creeps.transfer2Structure(creep, spawn)) {
+        return;
     }
+    if (Creeps.transfer2Structure(creep, tower)) {
+        return;
+    }
+    Creeps.transfer2Structure(creep, storage)
 
 
 }
