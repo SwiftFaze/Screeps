@@ -102,7 +102,7 @@ function validSpawnConditions(role, spawn) {
 
 function rooms2Claim() {
     for (const roomName in Game.rooms) {
-        if (!Game.rooms[roomName].controller.my && getFlag('CLAIM') !== undefined) {
+        if (Game.rooms[roomName].controller.my && getFlag('CLAIM') !== undefined) {
             return true
         }
     }
