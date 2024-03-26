@@ -208,7 +208,6 @@ function buildStructure(creep, structure) {
             moveToRoom(creep, structure.room)
         }
 
-
     }
     return able2Build;
 }
@@ -255,8 +254,10 @@ function repairStructure(creep, structure) {
     var able2Build = false;
     if (structure) {
         able2Build = true;
-        if (creep.repair(structure) === ERR_NOT_IN_RANGE) {
-            creep.moveTo(structure);
+        if (structure.hits < (structure.hitsMax * Structures.STRUCTURE_REPAIR_THRESHOLD)) {
+            if (creep.repair(structure) === ERR_NOT_IN_RANGE) {
+                creep.moveTo(structure);
+            }
         }
     }
     return able2Build;
