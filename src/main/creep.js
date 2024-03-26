@@ -253,8 +253,8 @@ function setMemoryBuildingState(creep) {
 function repairStructure(creep, structure) {
     var able2Build = false;
     if (structure) {
-        able2Build = true;
         if (structure.hits < (structure.hitsMax * Structures.STRUCTURE_REPAIR_THRESHOLD)) {
+            able2Build = true;
             if (creep.repair(structure) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(structure);
             }
