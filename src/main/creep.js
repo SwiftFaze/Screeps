@@ -1,5 +1,6 @@
 const CreepComponents = require("./creepComponents")
 const Structures = require("./structures")
+const Settings = require("./settings")
 const {getFlag} = require("./structures");
 
 const CREEP_ROLES = {
@@ -253,7 +254,7 @@ function setMemoryBuildingState(creep) {
 function repairStructure(creep, structure) {
     var able2Build = false;
     if (structure) {
-        if (structure.hits < (structure.hitsMax * Structures.STRUCTURE_REPAIR_THRESHOLD)) {
+        if (structure.hits < (structure.hitsMax * Settings.STRUCTURE_REPAIR_THRESHOLD)) {
             able2Build = true;
             if (creep.repair(structure) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(structure);

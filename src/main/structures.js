@@ -1,5 +1,4 @@
 const Settings = require("./settings")
-const STRUCTURE_REPAIR_THRESHOLD = 0.8
 
 function canWithdrawFromStorage(structure, resourceType) {
     let able2Withdraw = false
@@ -257,7 +256,6 @@ function getFlag(wantedFlagName) {
 }
 
 module.exports = {
-    STRUCTURE_REPAIR_THRESHOLD,
     getClosestBasicStructure,
     sourceIsDepleted,
     getFlag,
