@@ -152,7 +152,7 @@ function getClosestSite(creep, type) {
         }
     });
 
-    if (sites.length === 0 && type === STRUCTURE_SPAWN) {
+    if (sites.length === 0) {
         var buildFlag = getFlag('BUILD')
         if (buildFlag !== undefined) {
             const sites = Game.rooms[buildFlag.pos.roomName].find(FIND_MY_CONSTRUCTION_SITES, {
