@@ -6,11 +6,14 @@ const controllerSigns = require("./assets")
 
 function setControllerSign(creep) {
     if (creep.room.controller) {
-        if (!creep.room.controller.sign) {
-            const randomIndex = Math.floor(Math.random() * controllerSigns.controllerSigns.length);
-            if (creep.signController(creep.room.controller, controllerSigns.controllerSigns[randomIndex]) === ERR_NOT_IN_RANGE) {
-                creep.moveTo(creep.room.controller);
-                return true;
+        if (creep.room.controller.sign){
+            if (creep.room.controller.sign.username !== "EDIT") {
+                console.log(creep)
+                const randomIndex = Math.floor(Math.random() * controllerSigns.controllerSigns.length);
+                if (creep.signController(creep.room.controller, controllerSigns.controllerSigns[randomIndex]) === ERR_NOT_IN_RANGE) {
+                    creep.moveTo(creep.room.controller);
+                    return true;
+                }
             }
         }
     }
