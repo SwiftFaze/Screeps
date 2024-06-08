@@ -15,6 +15,7 @@ let towerDistance;
 let storageDistance;
 let controllerDistance;
 let storageLink;
+let terminal;
 
 
 function run(selectedCreep) {
@@ -96,6 +97,12 @@ function run(selectedCreep) {
                 return;
             }
         }
+        if (Creeps.transfer2Structure(creep, terminal)) {
+            creep.memory.hasWithdrawnFromStorage = false;
+            return;
+        }
+
+
 
         Creeps.upgradeRoomController(creep)
         creep.memory.hasWithdrawnFromStorage = false;
@@ -119,6 +126,7 @@ function setClosestStructures() {
     storage = Structures.getClosestEnergyStructure(creep, STRUCTURE_STORAGE);
     container = Structures.getClosestFullContainer(creep);
     storageLink = Structures.getClosestLinkToStorage(creep.room);
+    terminal = Structures.getClosestEnergyStructure(creep, STRUCTURE_TERMINAL);
 
 }
 
