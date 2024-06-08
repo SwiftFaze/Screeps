@@ -48,6 +48,7 @@ let nukerSite;
 let observer;
 let observer2Repair;
 let observerSite;
+let terminal;
 
 
 function run(selectedCreep) {
@@ -68,6 +69,9 @@ function run(selectedCreep) {
             if (Creeps.withdrawFromStructure(creep, storage, RESOURCE_ENERGY)) {
                 return;
             }
+        }
+        if (Creeps.withdrawFromStructure(creep, terminal, RESOURCE_ENERGY)) {
+            return;
         }
         if (Creeps.withdrawFromStructure(creep, container, RESOURCE_ENERGY)) {
             return;
@@ -107,6 +111,7 @@ function setClosestStructures() {
     extractor2Repair = Structures.getClosestRepairableBasicStructure(creep, STRUCTURE_EXTRACTOR);
     extractorSite = Structures.getClosestSite(creep, STRUCTURE_EXTRACTOR);
 
+    terminal = Structures.getClosestEnergyStructure(creep, STRUCTURE_TERMINAL);
     terminal2Repair = Structures.getClosestRepairableBasicStructure(creep, STRUCTURE_TERMINAL);
     terminalSite = Structures.getClosestSite(creep, STRUCTURE_TERMINAL);
 

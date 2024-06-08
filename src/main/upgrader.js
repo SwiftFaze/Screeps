@@ -4,6 +4,7 @@ let creep;
 let storage;
 let container;
 let resourceEnergy;
+let terminal;
 
 function run(selectedCreep) {
     creep = selectedCreep;
@@ -18,7 +19,9 @@ function run(selectedCreep) {
                 return;
             }
         }
-
+        if (Creeps.withdrawFromStructure(creep, terminal, RESOURCE_ENERGY)) {
+            return;
+        }
         if (Creeps.pickUpResource(creep, resourceEnergy)) {
             return;
         }
@@ -39,6 +42,8 @@ function setClosestStructures() {
     storage = Structures.getClosestStorage(creep);
     container = Structures.getClosestFullContainer(creep);
     resourceEnergy = Structures.getClosestDroppedResource(creep, RESOURCE_ENERGY);
+    terminal = Structures.getClosestEnergyStructure(creep, STRUCTURE_TERMINAL);
+
 
 }
 
