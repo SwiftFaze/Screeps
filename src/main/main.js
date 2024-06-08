@@ -3,6 +3,7 @@ const Spawners = require('./spawn')
 const Towers = require('./tower')
 const Links = require('./link')
 const Observers = require('./observer')
+const Terminal = require('./terminal')
 
 
 module.exports.loop = function () {
@@ -13,6 +14,7 @@ module.exports.loop = function () {
     Spawners.runCreep();
     Towers.run();
     Links.run();
+    Terminal.run();
 
 
 
