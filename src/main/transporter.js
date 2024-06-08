@@ -93,17 +93,16 @@ function run(selectedCreep) {
             return;
         }
 
-        if (Creeps.transfer2Structure(creep, storage)) {
-            return;
-        }
-
         if (!creep.memory.hasWithdrawnFromStorage) {
-            if (Creeps.transfer2Structure(creep, terminal)) {
-                creep.memory.hasWithdrawnFromStorage = false;
+            if (Creeps.transfer2Structure(creep, storage)) {
                 return;
             }
         }
 
+        if (Creeps.transfer2Structure(creep, terminal)) {
+            creep.memory.hasWithdrawnFromStorage = false;
+            return;
+        }
 
         Creeps.upgradeRoomController(creep)
         creep.memory.hasWithdrawnFromStorage = false;
